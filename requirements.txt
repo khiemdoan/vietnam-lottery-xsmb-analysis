@@ -1,0 +1,7 @@
+pytz==2022.6
+httpx[brotli,http2]==0.23.1
+cloudscraper==1.2.66
+beautifulsoup4==4.11.1
+html5lib==1.1
+pandas==1.5.2
+isort==5.10.1
