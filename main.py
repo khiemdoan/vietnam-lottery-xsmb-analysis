@@ -4,10 +4,10 @@ __github__ = 'https://github.com/khiemdoan'
 __email__ = 'doankhiem.crazy@gmail.com'
 
 import itertools
-from dataclasses import dataclass
+from dataclasses import asdict, dataclass
 from datetime import date, datetime, time, timedelta
 from time import sleep
-from typing import List
+from typing import Dict, List
 
 import pandas as pd
 from bs4 import BeautifulSoup
@@ -53,6 +53,20 @@ def fetch_result(selected_date: date) -> Result:
     return result
 
 
+def convert_result_to_series(result: Result) -> Dict:
+    data = {}
+    for key, value in asdict(result).items():
+        if key == 'date':
+            data['date'] = value
+        elif len(value) == 1:
+            data[key] = value[0]
+        else:
+            for i, v in enumerate(value, start=1):
+                data[f'{key}-{i}'] = v
+    series = pd.Series(data)
+    return series
+
+
 if __name__ == '__main__':
     tz = timezone('Asia/Ho_Chi_Minh')
     now = datetime.now(tz)
@@ -63,16 +77,18 @@ if __name__ == '__main__':
         last_date -= timedelta(days=1)
 
     results: List[Result] = []
+    result_series: List[pd.Series] = []
 
     delta = (last_date - start_date).days + 1
     for i in range(delta):
         selected_date = start_date + timedelta(days=i)
         result = fetch_result(selected_date)
+        print(result)
         sleep(0.1)
         if len(result.special) == 0:
             continue
-        results.append(result)
-        print(result)
+        series = convert_result_to_series(result)
+        result_series.append(series)
 
     g = itertools.groupby(len(r.special) for r in results)
     assert next(g, True) and not next(g, False)
@@ -90,3 +106,7 @@ if __name__ == '__main__':
     assert next(g, True) and not next(g, False)
     g = itertools.groupby(len(r.prize7) for r in results)
     assert next(g, True) and not next(g, False)
+
+    df = pd.DataFrame(result_series)
+    df.set_index('date', inplace=True)
+    df.to_csv('results/xsmb.csv')
