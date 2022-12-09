@@ -31,6 +31,7 @@ def load_results(path: Path) -> pd.DataFrame:
         results = pd.DataFrame(columns=columns)
 
     results['date'] = pd.to_datetime(results['date'])
+    results.iloc[:, 1:] = results.iloc[:, 1:].astype('int64')
     results.set_index('date', inplace=True)
     return results
 
@@ -68,6 +69,7 @@ def fetch_result(selected_date: date) -> pd.DataFrame:
         'prize7_1': [prize7[0]], 'prize7_2': [prize7[1]], 'prize7_3': [prize7[2]], 'prize7_4': [prize7[3]],
     })
     df['date'] = pd.to_datetime(df['date'])
+    df.iloc[:, 1:] = df.iloc[:, 1:].astype('int64')
     df.set_index('date', inplace=True)
     return df
 
@@ -79,7 +81,7 @@ if __name__ == '__main__':
     print(f'Loaded data: {results.shape}')
 
     start_date = results.index.max()
-    if start_date is None:
+    if pd.isnull(start_date):
         start_date = date(2010, 1, 1)
     else:
         start_date = start_date.date()

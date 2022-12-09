@@ -1,0 +1,40 @@
+name: Update data
+
+on:
+  schedule:
+    - cron: 45 11 * * * # 6:45 PM in Vietnam
+
+jobs:
+  update-data:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: checkout repo content
+        uses: actions/checkout@v3
+
+      - name: setup python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: install python packages
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: update data
+        run: python main.py
+
+      - name: commit data
+        run: |
+          git config --local user.name "GitHub Action"
+          git config --local user.email "action@github.com"
+          git add -A
+          git diff-index --quiet HEAD || git commit -am "Updated $(date +'%Y-%m-%d')"
+
+      - name: push changes
+        uses: ad-m/github-push-action@v0.6.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main
