@@ -26,15 +26,10 @@ jobs:
       - name: update data
         run: python main.py
 
-      - name: commit data
-        run: |
-          git config --local user.name "GitHub Action"
-          git config --local user.email "action@github.com"
-          git add -A
-          git diff-index --quiet HEAD || git commit -am "Updated $(date +'%Y-%m-%d')"
-
       - name: push changes
-        uses: ad-m/github-push-action@v0.6.0
+        uses: github-actions-x/commit@v2.9
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: main
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: Updated $(date +'%Y-%m-%d')
+          email: action@github.com
+          name: GitHub Action
