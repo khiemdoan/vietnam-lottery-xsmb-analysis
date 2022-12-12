@@ -26,10 +26,13 @@ jobs:
       - name: update data
         run: python main.py
 
+      - name: get current date
+        run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+
       - name: push changes
-        uses: github-actions-x/commit@v2.9
+        uses: actions-x/commit@v6
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: Updated $(date +'%Y-%m-%d')
+          token: ${{ secrets.GITHUB_TOKEN }}
+          message: Updated ${{ env.date }}
           email: action@github.com
           name: GitHub Action
