@@ -108,3 +108,9 @@ if __name__ == '__main__':
 
     results.to_csv(file_path)
     print(f'Saved data: {results.shape}')
+
+    last_date = pd.to_datetime(last_date)
+    start_date = pd.Timestamp(year=last_date.year-1, month=last_date.month, day=last_date.day)
+
+    small_results = results[(start_date < results.index) & (results.index <= last_date)]
+    small_results.to_csv('results/xsmb_1_year.csv')
