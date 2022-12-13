@@ -3,6 +3,7 @@ __author__ = 'KhiemDH'
 __github__ = 'https://github.com/khiemdoan'
 __email__ = 'doankhiem.crazy@gmail.com'
 
+import logging
 from datetime import date, datetime, time, timedelta
 from pathlib import Path
 from time import sleep
@@ -98,11 +99,12 @@ if __name__ == '__main__':
         selected_date = start_date + timedelta(days=i)
         if pd.to_datetime(selected_date) in results.index:
             continue
-        print(f'Fetch: {selected_date}')
+        print(f'Fetching: {selected_date}')
         try:
             row = fetch_result(selected_date)
-        except:
-            continue
+            print(row.iloc[0].tolist())
+        except Exception as ex:
+            logging.exception(ex)
         results = pd.concat([results, row])
         sleep(0.1)
 
