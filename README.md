@@ -5,44 +5,44 @@ Auto fetch Vietnam lottery results daily.
 <table>
   <tr>
     <td>Date</td>
-    <td>16-12-2022</td>
+    <td>17-12-2022</td>
   </tr>
   <tr>
     <td>Special</td>
-    <td>13086</td>
+    <td>71424</td>
   </tr>
   <tr>
     <td>First</td>
-    <td>69861</td>
+    <td>66934</td>
   </tr>
   <tr>
     <td>Second</td>
-    <td>60578, 56199</td>
+    <td>50533, 74665</td>
   </tr>
   <tr>
     <td rowspan="2">Third</td>
-    <td>41818, 40709, 24243</td>
+    <td>39908, 00797, 93691</td>
   </tr>
   <tr>
-    <td>78501, 37344, 06196</td>
+    <td>18733, 47971, 26018</td>
   </tr>
   <tr>
     <td>Fourth</td>
-    <td>1624, 7688, 0343, 8140</td>
+    <td>1541, 0875, 2557, 1632</td>
   </tr>
   <tr>
     <td rowspan="2">Fifth</td>
-    <td>1534, 5765, 1319</td>
+    <td>0820, 3760, 8781</td>
   </tr>
   <tr>
-    <td>1639, 4683, 9921</td>
+    <td>2239, 1046, 0825</td>
   </tr>
   <tr>
     <td>Sixth</td>
-    <td>522, 244, 782</td>
+    <td>849, 255, 247</td>
   </tr>
   <tr>
     <td>Seventh</td>
-    <td>42, 95, 26, 15</td>
+    <td>29, 56, 88, 14</td>
   </tr>
 </table>
