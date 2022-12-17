@@ -12,6 +12,7 @@ import pandas as pd
 from bs4 import BeautifulSoup
 from cloudscraper import CloudScraper
 from pytz import timezone
+from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 
 def load_results(path: Path) -> pd.DataFrame:
@@ -33,7 +34,7 @@ def load_results(path: Path) -> pd.DataFrame:
 
     results['date'] = pd.to_datetime(results['date'])
     results.iloc[:, 1:] = results.iloc[:, 1:].astype('int64')
-    results.set_index('date', inplace=True)
+    # results.set_index('date', inplace=True)
     return results
 
 
@@ -71,7 +72,7 @@ def fetch_result(selected_date: date) -> pd.DataFrame:
     })
     df['date'] = pd.to_datetime(df['date'])
     df.iloc[:, 1:] = df.iloc[:, 1:].astype('int64')
-    df.set_index('date', inplace=True)
+    # df.set_index('date', inplace=True)
     return df
 
 
@@ -81,10 +82,12 @@ if __name__ == '__main__':
     results = load_results(file_path)
     print(f'Loaded data: {results.shape}')
 
-    start_date = results.index.max()
+    start_date = results['date'].max()
     if pd.isnull(start_date):
         start_date = date(2010, 1, 1)
     else:
+        start_date = start_date.to_pydatetime()
+        start_date += timedelta(days=1)
         start_date = start_date.date()
 
     tz = timezone('Asia/Ho_Chi_Minh')
@@ -108,11 +111,20 @@ if __name__ == '__main__':
         results = pd.concat([results, row])
         sleep(0.1)
 
-    results.to_csv(file_path)
+    results.to_csv(file_path, index=False)
     print(f'Saved data: {results.shape}')
 
     last_date = pd.to_datetime(last_date)
     start_date = pd.Timestamp(year=last_date.year-1, month=last_date.month, day=last_date.day)
 
-    small_results = results[(start_date < results.index) & (results.index <= last_date)]
-    small_results.to_csv('results/xsmb_1_year.csv')
+    small_results = results[(start_date < results['date']) & (results['date'] <= last_date)]
+    small_results.to_csv('results/xsmb_1_year.csv', index=False)
+
+    env = Environment(
+        loader=FileSystemLoader('templates'),
+        autoescape=select_autoescape()
+    )
+    template = env.get_template('README.j2')
+    content = template.render(**small_results.iloc[-1])
+    with open('README.md', 'w') as outfile:
+        outfile.write(content)
