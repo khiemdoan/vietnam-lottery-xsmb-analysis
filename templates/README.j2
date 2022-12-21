@@ -2,6 +2,8 @@
 
 Auto fetch Vietnam lottery results daily.
 
+<h2>Result</h2>
+
 <table>
   <tr>
     <td>Date</td>
@@ -46,3 +48,19 @@ Auto fetch Vietnam lottery results daily.
     <td>{{ "{:02}".format(prize7_1) }}, {{ "{:02}".format(prize7_2) }}, {{ "{:02}".format(prize7_3) }}, {{ "{:02}".format(prize7_4) }}</td>
   </tr>
 </table>
+
+<h2>Loto result</h2>
+
+<table>
+  <tr>
+    <td>First</td>
+    <td>Last</td>
+  </tr>
+  {%- for result in loto_result %}
+    <tr>
+      <td>{{ loop.index0 }}</td>
+      <td>{{ result }}</td>
+    </tr>
+  {%- endfor %}
+</table>
+
