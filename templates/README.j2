@@ -2,65 +2,11 @@
 
 Auto fetch Vietnam lottery results daily.
 
-<h2>Result</h2>
-
-<table>
-  <tr>
-    <td>Date</td>
-    <td>{{ date.strftime('%d-%m-%Y') }}</td>
-  </tr>
-  <tr>
-    <td>Special</td>
-    <td>{{ "{:05}".format(special) }}</td>
-  </tr>
-  <tr>
-    <td>First</td>
-    <td>{{ "{:05}".format(prize1) }}</td>
-  </tr>
-  <tr>
-    <td>Second</td>
-    <td>{{ "{:05}".format(prize2_1) }}, {{ "{:05}".format(prize2_2) }}</td>
-  </tr>
-  <tr>
-    <td rowspan="2">Third</td>
-    <td>{{ "{:05}".format(prize3_1) }}, {{ "{:05}".format(prize3_2) }}, {{ "{:05}".format(prize3_3) }}</td>
-  </tr>
-  <tr>
-    <td>{{ "{:05}".format(prize3_4) }}, {{ "{:05}".format(prize3_5) }}, {{ "{:05}".format(prize3_6) }}</td>
-  </tr>
-  <tr>
-    <td>Fourth</td>
-    <td>{{ "{:04}".format(prize4_1) }}, {{ "{:04}".format(prize4_2) }}, {{ "{:04}".format(prize4_3) }}, {{ "{:04}".format(prize4_4) }}</td>
-  </tr>
-  <tr>
-    <td rowspan="2">Fifth</td>
-    <td>{{ "{:04}".format(prize5_1) }}, {{ "{:04}".format(prize5_2) }}, {{ "{:04}".format(prize5_3) }}</td>
-  </tr>
-  <tr>
-    <td>{{ "{:04}".format(prize5_4) }}, {{ "{:04}".format(prize5_5) }}, {{ "{:04}".format(prize5_6) }}</td>
-  </tr>
-  <tr>
-    <td>Sixth</td>
-    <td>{{ "{:03}".format(prize6_1) }}, {{ "{:03}".format(prize6_2) }}, {{ "{:03}".format(prize6_3) }}</td>
-  </tr>
-  <tr>
-    <td>Seventh</td>
-    <td>{{ "{:02}".format(prize7_1) }}, {{ "{:02}".format(prize7_2) }}, {{ "{:02}".format(prize7_3) }}, {{ "{:02}".format(prize7_4) }}</td>
-  </tr>
-</table>
+<table><tr><td>Date</td><td>{{ date.strftime('%d-%m-%Y') }}</td></tr><tr><td>Special</td><td>{{ "{:05}".format(special) }}</td></tr><tr><td>First</td><td>{{ "{:05}".format(prize1) }}</td></tr><tr><td>Second</td><td>{{ "{:05}".format(prize2_1) }}, {{ "{:05}".format(prize2_2) }}</td></tr><tr><td rowspan="2">Third</td><td>{{ "{:05}".format(prize3_1) }}, {{ "{:05}".format(prize3_2) }}, {{ "{:05}".format(prize3_3) }}</td></tr><tr><td>{{ "{:05}".format(prize3_4) }}, {{ "{:05}".format(prize3_5) }}, {{ "{:05}".format(prize3_6) }}</td></tr><tr><td>Fourth</td><td>{{ "{:04}".format(prize4_1) }}, {{ "{:04}".format(prize4_2) }}, {{ "{:04}".format(prize4_3) }}, {{ "{:04}".format(prize4_4) }}</td></tr><tr><td rowspan="2">Fifth</td><td>{{ "{:04}".format(prize5_1) }}, {{ "{:04}".format(prize5_2) }}, {{ "{:04}".format(prize5_3) }}</td></tr><tr><td>{{ "{:04}".format(prize5_4) }}, {{ "{:04}".format(prize5_5) }}, {{ "{:04}".format(prize5_6) }}</td></tr><tr><td>Sixth</td><td>{{ "{:03}".format(prize6_1) }}, {{ "{:03}".format(prize6_2) }}, {{ "{:03}".format(prize6_3) }}</td></tr><tr><td>Seventh</td><td>{{ "{:02}".format(prize7_1) }}, {{ "{:02}".format(prize7_2) }}, {{ "{:02}".format(prize7_3) }}, {{ "{:02}".format(prize7_4) }}</td></tr></table>
 
 <h2>Loto result</h2>
+<table><tr><td>First</td><td>Last</td></tr>{%- for result in loto_result %}<tr><td>{{ loop.index0 }}</td><td>{{ result }}</td></tr>{%- endfor %}</table>
 
-<table>
-  <tr>
-    <td>First</td>
-    <td>Last</td>
-  </tr>
-  {%- for result in loto_result %}
-    <tr>
-      <td>{{ loop.index0 }}</td>
-      <td>{{ result }}</td>
-    </tr>
-  {%- endfor %}
-</table>
-
+| Lotery      | Loto |
+| :-----------: | :-----------: |
+| <table><tr><td>Date</td><td>{{ date.strftime('%d-%m-%Y') }}</td></tr><tr><td>Special</td><td>{{ "{:05}".format(special) }}</td></tr><tr><td>First</td><td>{{ "{:05}".format(prize1) }}</td></tr><tr><td>Second</td><td>{{ "{:05}".format(prize2_1) }}, {{ "{:05}".format(prize2_2) }}</td></tr><tr><td rowspan="2">Third</td><td>{{ "{:05}".format(prize3_1) }}, {{ "{:05}".format(prize3_2) }}, {{ "{:05}".format(prize3_3) }}</td></tr><tr><td>{{ "{:05}".format(prize3_4) }}, {{ "{:05}".format(prize3_5) }}, {{ "{:05}".format(prize3_6) }}</td></tr><tr><td>Fourth</td><td>{{ "{:04}".format(prize4_1) }}, {{ "{:04}".format(prize4_2) }}, {{ "{:04}".format(prize4_3) }}, {{ "{:04}".format(prize4_4) }}</td></tr><tr><td rowspan="2">Fifth</td><td>{{ "{:04}".format(prize5_1) }}, {{ "{:04}".format(prize5_2) }}, {{ "{:04}".format(prize5_3) }}</td></tr><tr><td>{{ "{:04}".format(prize5_4) }}, {{ "{:04}".format(prize5_5) }}, {{ "{:04}".format(prize5_6) }}</td></tr><tr><td>Sixth</td><td>{{ "{:03}".format(prize6_1) }}, {{ "{:03}".format(prize6_2) }}, {{ "{:03}".format(prize6_3) }}</td></tr><tr><td>Seventh</td><td>{{ "{:02}".format(prize7_1) }}, {{ "{:02}".format(prize7_2) }}, {{ "{:02}".format(prize7_3) }}, {{ "{:02}".format(prize7_4) }}</td></tr></table> | <table><tr><td>First</td><td>Last</td></tr>{%- for result in loto_result %}<tr><td>{{ loop.index0 }}</td><td>{{ result }}</td></tr>{%- endfor %}</table> |
