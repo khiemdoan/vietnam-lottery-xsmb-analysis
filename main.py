@@ -120,11 +120,20 @@ if __name__ == '__main__':
     small_results = results[(start_date < results['date']) & (results['date'] <= last_date)]
     small_results.to_csv('results/xsmb_1_year.csv', index=False)
 
+    recent_results = small_results.iloc[-1].values[1:]
+    recent_results = recent_results % 100
+    loto_result = []
+    for i in range(10):
+        category = sorted([d for d in recent_results if d // 10 == i])
+        category = [f'{d%10:1d}' for d in category]
+        category = ', '.join(category)
+        loto_result.append(category)
+
     env = Environment(
         loader=FileSystemLoader('templates'),
         autoescape=select_autoescape()
     )
     template = env.get_template('README.j2')
-    content = template.render(**small_results.iloc[-1])
+    content = template.render(loto_result=loto_result, **small_results.iloc[-1])
     with open('README.md', 'w') as outfile:
         outfile.write(content)
