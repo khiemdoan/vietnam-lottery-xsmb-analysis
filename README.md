@@ -1,4 +1,4 @@
-# Vietnam Lottery Results
+# Vietnam Lottery (XSMB) Analysis
 
 Using GitHub Action to automatically fetch and analyze results of the Vietnam lottery daily.
 
@@ -8,10 +8,8 @@ Using GitHub Action to automatically fetch and analyze results of the Vietnam lo
 
 <h2>Analysis of one-year results</h2>
 
-Mean: 97.47 times / number.
-
 Max count: 126. Min count: 72.
 
-Standard deviation: 11.4.
+Mean: 97.47. Standard deviation: 11.4.
 
 ![Heatmap](images/heatmap.jpg)
