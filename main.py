@@ -135,8 +135,9 @@ if __name__ == '__main__':
     numbers = numbers % 100
     numbers = numbers.stack()
 
-    total = len(numbers)
     counts = numbers.value_counts()
+    max_count = counts.max().round(2)
+    min_count = counts.min().round(2)
     mean = counts.mean().round(2)
     std = counts.std().round(2)
 
@@ -145,7 +146,7 @@ if __name__ == '__main__':
         autoescape=select_autoescape()
     )
     template = env.get_template('README.j2')
-    content = template.render(loto_result=loto_result, total=total, mean=mean, std=std, **small_results.iloc[-1])
+    content = template.render(loto_result=loto_result, max_count=max_count, min_count=min_count, mean=mean, std=std, **small_results.iloc[-1])
     with open('README.md', 'w') as outfile:
         outfile.write(content)
 

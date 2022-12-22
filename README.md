@@ -10,6 +10,8 @@ Using GitHub Action to automatically fetch and analyze results of the Vietnam lo
 
 Mean: 97.47 times / number.
 
+Max count: 126. Min count: 72.
+
 Standard deviation: 11.4.
 
 ![Heatmap](images/heatmap.jpg)
