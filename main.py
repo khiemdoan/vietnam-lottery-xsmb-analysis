@@ -9,10 +9,12 @@ from pathlib import Path
 from time import sleep
 
 import pandas as pd
+import seaborn as sns
 from bs4 import BeautifulSoup
 from cloudscraper import CloudScraper
-from pytz import timezone
 from jinja2 import Environment, FileSystemLoader, select_autoescape
+from matplotlib import pyplot as plt
+from pytz import timezone
 
 
 def load_results(path: Path) -> pd.DataFrame:
@@ -129,11 +131,31 @@ if __name__ == '__main__':
         category = ', '.join(category)
         loto_result.append(category)
 
+    numbers = small_results.drop(columns=['date'])
+    numbers = numbers % 100
+    numbers = numbers.stack()
+
+    total = len(numbers)
+    counts = numbers.value_counts()
+    mean = counts.mean().round(2)
+    std = counts.std().round(2)
+
     env = Environment(
         loader=FileSystemLoader('templates'),
         autoescape=select_autoescape()
     )
     template = env.get_template('README.j2')
-    content = template.render(loto_result=loto_result, **small_results.iloc[-1])
+    content = template.render(loto_result=loto_result, total=total, mean=mean, std=std, **small_results.iloc[-1])
     with open('README.md', 'w') as outfile:
         outfile.write(content)
+
+    counts = counts.reset_index()
+    counts.columns = ['value', 'count']
+    counts['tens'] = counts['value'] // 10
+    counts['ones'] = counts['value'] % 10
+
+    heatmap_data = counts[['tens', 'ones', 'count']]
+    heatmap_data = heatmap_data.pivot(index='tens', columns='ones', values='count')
+    sns.heatmap(heatmap_data, annot=True, fmt='d', cmap='RdYlGn')
+    plt.title('Detail')
+    plt.savefig('images/heatmap.jpg')
