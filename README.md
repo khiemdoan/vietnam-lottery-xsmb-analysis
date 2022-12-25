@@ -19,3 +19,7 @@ Mean: 97.47. Standard deviation: 11.34.
 <h3>Top 10</h3>
 
 ![Top 10](images/top-10.jpg)
+
+<h3>Distribution</h3>
+
+![Distribution](images/distribution.jpg)
