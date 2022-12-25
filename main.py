@@ -7,6 +7,7 @@ import logging
 from datetime import date, datetime, time, timedelta
 from pathlib import Path
 from time import sleep
+import numpy as np
 
 import pandas as pd
 import seaborn as sns
@@ -161,7 +162,7 @@ if __name__ == '__main__':
 
     fig, ax = plt.subplots()
     sns.heatmap(heatmap_data, annot=True, fmt='d', cmap='RdYlGn', ax=ax)
-    ax.title.set_text('Detail')
+    ax.set_title('Detail')
     fig.savefig('images/heatmap.jpg')
 
     # Top 10 plot
@@ -173,7 +174,7 @@ if __name__ == '__main__':
     sns.barplot(bar_data, x='value', y='freq', ax=ax)
     for bar in ax.containers:
         ax.bar_label(bar, fmt='%d')
-    ax.title.set_text('Top 10')
+    ax.set_title('Top 10')
     fig.savefig('images/top-10.jpg')
 
     # Distribution
@@ -182,6 +183,11 @@ if __name__ == '__main__':
     bins = data.max()[0] - data.min()[0] + 2
 
     fig, ax = plt.subplots()
-    sns.histplot(data, kde=True, bins=bins, ax=ax)
-    ax.title.set_text('Distribution')
+    sns.histplot(data, kde=True, bins=bins, color='crimson', ax=ax)
+    kdeline = ax.lines[0]
+    xs = kdeline.get_xdata()
+    ys = kdeline.get_ydata()
+    ax.vlines(mean, 0, np.interp(mean, xs, ys), color='crimson', ls=':')
+    ax.fill_between(xs, 0, ys, where=(mean - std <= xs) & (xs <= mean + std), interpolate=True, facecolor='crimson', alpha=0.3)
+    ax.set_title('Distribution')
     fig.savefig('images/distribution.jpg')
