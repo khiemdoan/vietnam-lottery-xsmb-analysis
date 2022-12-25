@@ -149,15 +149,15 @@ if __name__ == '__main__':
         outfile.write(content)
 
     counts = counts.reset_index()
-    counts.columns = ['value', 'count']
+    counts.columns = ['value', 'freq']
 
     # Detail plot
 
     heatmap_data = counts.copy()
     heatmap_data['tens'] = heatmap_data['value'] // 10
     heatmap_data['ones'] = heatmap_data['value'] % 10
-    heatmap_data = heatmap_data[['tens', 'ones', 'count']]
-    heatmap_data = heatmap_data.pivot(index='tens', columns='ones', values='count')
+    heatmap_data = heatmap_data[['tens', 'ones', 'freq']]
+    heatmap_data = heatmap_data.pivot(index='tens', columns='ones', values='freq')
 
     fig, ax = plt.subplots()
     sns.heatmap(heatmap_data, annot=True, fmt='d', cmap='RdYlGn', ax=ax)
@@ -170,8 +170,18 @@ if __name__ == '__main__':
     bar_data['value'] = bar_data['value'].apply(lambda r: f'{r:02d}')
 
     fig, ax = plt.subplots()
-    sns.barplot(bar_data, x='value', y='count', ax=ax)
+    sns.barplot(bar_data, x='value', y='freq', ax=ax)
     for bar in ax.containers:
         ax.bar_label(bar, fmt='%d')
     ax.title.set_text('Top 10')
     fig.savefig('images/top-10.jpg')
+
+    # Distribution
+
+    data = counts[['freq']].copy()
+    bins = data.max()[0] - data.min()[0] + 2
+
+    fig, ax = plt.subplots()
+    sns.histplot(data, kde=True, bins=bins, ax=ax)
+    ax.title.set_text('Distribution')
+    fig.savefig('images/distribution.jpg')
