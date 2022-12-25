@@ -12,4 +12,10 @@ Max count: 126. Min count: 72.
 
 Mean: 97.47. Standard deviation: 11.34.
 
-![Heatmap](images/heatmap.jpg)
+<h3>Detail</h3>
+
+![Detail](images/heatmap.jpg)
+
+<h3>Top 10</h3>
+
+![Top 10](images/top-10.jpg)

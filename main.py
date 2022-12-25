@@ -36,7 +36,6 @@ def load_results(path: Path) -> pd.DataFrame:
 
     results['date'] = pd.to_datetime(results['date'])
     results.iloc[:, 1:] = results.iloc[:, 1:].astype('int64')
-    # results.set_index('date', inplace=True)
     return results
 
 
@@ -74,7 +73,6 @@ def fetch_result(selected_date: date) -> pd.DataFrame:
     })
     df['date'] = pd.to_datetime(df['date'])
     df.iloc[:, 1:] = df.iloc[:, 1:].astype('int64')
-    # df.set_index('date', inplace=True)
     return df
 
 
@@ -152,11 +150,28 @@ if __name__ == '__main__':
 
     counts = counts.reset_index()
     counts.columns = ['value', 'count']
-    counts['tens'] = counts['value'] // 10
-    counts['ones'] = counts['value'] % 10
 
-    heatmap_data = counts[['tens', 'ones', 'count']]
+    # Detail plot
+
+    heatmap_data = counts.copy()
+    heatmap_data['tens'] = heatmap_data['value'] // 10
+    heatmap_data['ones'] = heatmap_data['value'] % 10
+    heatmap_data = heatmap_data[['tens', 'ones', 'count']]
     heatmap_data = heatmap_data.pivot(index='tens', columns='ones', values='count')
-    sns.heatmap(heatmap_data, annot=True, fmt='d', cmap='RdYlGn')
-    plt.title('Detail')
-    plt.savefig('images/heatmap.jpg')
+
+    fig, ax = plt.subplots()
+    sns.heatmap(heatmap_data, annot=True, fmt='d', cmap='RdYlGn', ax=ax)
+    ax.title.set_text('Detail')
+    fig.savefig('images/heatmap.jpg')
+
+    # Top 10 plot
+
+    bar_data = counts[:10].copy()
+    bar_data['value'] = bar_data['value'].apply(lambda r: f'{r:02d}')
+
+    fig, ax = plt.subplots()
+    sns.barplot(bar_data, x='value', y='count', ax=ax)
+    for bar in ax.containers:
+        ax.bar_label(bar, fmt='%d')
+    ax.title.set_text('Top 10')
+    fig.savefig('images/top-10.jpg')
