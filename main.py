@@ -77,6 +77,13 @@ def fetch_result(selected_date: date) -> pd.DataFrame:
     return df
 
 
+def colors_from_values(values, palette_name):
+    normalized = (values - min(values)) / (max(values) - min(values))
+    indices = np.round(normalized * (len(values) - 1)).astype(np.int32)
+    palette = sns.color_palette(palette_name, len(values))
+    return np.array(palette).take(indices, axis=0)
+
+
 if __name__ == '__main__':
     file_path = 'results/xsmb.csv'
 
@@ -171,7 +178,8 @@ if __name__ == '__main__':
     bar_data['value'] = bar_data['value'].apply(lambda r: f'{r:02d}')
 
     fig, ax = plt.subplots()
-    sns.barplot(bar_data, x='value', y='freq', ax=ax)
+    palette = reversed(colors_from_values(bar_data['freq'], 'summer'))
+    sns.barplot(bar_data, x='value', y='freq', palette=palette, ax=ax)
     for bar in ax.containers:
         ax.bar_label(bar, fmt='%d')
     ax.set_title('Top 10')
@@ -180,17 +188,17 @@ if __name__ == '__main__':
     # Distribution
 
     data = counts[['freq']].copy()
-    bins = data.max()[0] - data.min()[0] + 2
+    bins = data.max()[0] - data.min()[0] + 1
 
     fig, ax = plt.subplots()
-    sns.histplot(data, kde=True, bins=bins, color='crimson', ax=ax)
+    sns.histplot(data, kde=True, bins=bins, ax=ax)
     kdeline = ax.lines[0]
     xs = kdeline.get_xdata()
     ys = kdeline.get_ydata()
-    ax.vlines(mean, 0, np.interp(mean, xs, ys), color='crimson', linestyles='solid')
-    ax.vlines(mean - std, 0, np.interp(mean - std, xs, ys), color='crimson', linestyles='dashed')
-    ax.vlines(mean + std, 0, np.interp(mean + std, xs, ys), color='crimson', linestyles='dashed')
-    ax.vlines(mean - 2*std, 0, np.interp(mean - 2*std, xs, ys), color='crimson', linestyles='dotted')
-    ax.vlines(mean + 2*std, 0, np.interp(mean + 2*std, xs, ys), color='crimson', linestyles='dotted')
+    ax.vlines(mean, 0, np.interp(mean, xs, ys), color='red', linestyles='solid')
+    ax.vlines(mean - std, 0, np.interp(mean - std, xs, ys), color='red', linestyles='dashed')
+    ax.vlines(mean + std, 0, np.interp(mean + std, xs, ys), color='red', linestyles='dashed')
+    ax.vlines(mean - 2*std, 0, np.interp(mean - 2*std, xs, ys), color='red', linestyles='dotted')
+    ax.vlines(mean + 2*std, 0, np.interp(mean + 2*std, xs, ys), color='red', linestyles='dotted')
     ax.set_title('Distribution')
     fig.savefig('images/distribution.jpg')
