@@ -7,8 +7,8 @@ import logging
 from datetime import date, datetime, time, timedelta
 from pathlib import Path
 from time import sleep
-import numpy as np
 
+import numpy as np
 import pandas as pd
 import seaborn as sns
 from bs4 import BeautifulSoup
@@ -187,7 +187,10 @@ if __name__ == '__main__':
     kdeline = ax.lines[0]
     xs = kdeline.get_xdata()
     ys = kdeline.get_ydata()
-    ax.vlines(mean, 0, np.interp(mean, xs, ys), color='crimson', ls=':')
-    ax.fill_between(xs, 0, ys, where=(mean - std <= xs) & (xs <= mean + std), interpolate=True, facecolor='crimson', alpha=0.3)
+    ax.vlines(mean, 0, np.interp(mean, xs, ys), color='crimson', linestyles='solid')
+    ax.vlines(mean - std, 0, np.interp(mean - std, xs, ys), color='crimson', linestyles='dashed')
+    ax.vlines(mean + std, 0, np.interp(mean + std, xs, ys), color='crimson', linestyles='dashed')
+    ax.vlines(mean - 2*std, 0, np.interp(mean - 2*std, xs, ys), color='crimson', linestyles='dotted')
+    ax.vlines(mean + 2*std, 0, np.interp(mean + 2*std, xs, ys), color='crimson', linestyles='dotted')
     ax.set_title('Distribution')
     fig.savefig('images/distribution.jpg')
