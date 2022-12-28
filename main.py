@@ -134,7 +134,7 @@ if __name__ == '__main__':
     for i in range(10):
         category = sorted([d for d in recent_results if d // 10 == i])
         category = [f'{d%10:1d}' for d in category]
-        category = ', '.join(category)
+        category = ', '.join(category) if len(category) > 0 else '-'
         loto_result.append(category)
 
     numbers = small_results.drop(columns=['date'])
