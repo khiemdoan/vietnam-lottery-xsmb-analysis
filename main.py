@@ -191,7 +191,7 @@ if __name__ == '__main__':
     bins = data.max()[0] - data.min()[0] + 1
 
     fig, ax = plt.subplots()
-    sns.histplot(data, kde=True, bins=bins, ax=ax)
+    sns.histplot(data, kde=True, bins=bins, fill=False, ax=ax)
     kdeline = ax.lines[0]
     xs = kdeline.get_xdata()
     ys = kdeline.get_ydata()
