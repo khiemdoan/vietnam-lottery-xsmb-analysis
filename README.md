@@ -4,13 +4,13 @@ Using GitHub Action to automatically fetch and analyze results of the Vietnam lo
 
 | Lotery      | Loto |
 | :-----------: | :-----------: |
-| <table><tr><td>Date</td><td>15-01-2023</td></tr><tr><td>Special</td><td>44221</td></tr><tr><td>First</td><td>25945</td></tr><tr><td>Second</td><td>14590, 57392</td></tr><tr><td rowspan="2">Third</td><td>84792, 14379, 92716</td></tr><tr><td>86841, 87280, 96564</td></tr><tr><td>Fourth</td><td>7401, 4194, 1991, 5569</td></tr><tr><td rowspan="2">Fifth</td><td>9333, 9812, 3708</td></tr><tr><td>3904, 1078, 2104</td></tr><tr><td>Sixth</td><td>938, 566, 749</td></tr><tr><td>Seventh</td><td>45, 57, 00, 28</td></tr></table> | <table><tr><td>First</td><td>Last</td></tr><tr><td>0</td><td>0, 1, 4, 4, 8</td></tr><tr><td>1</td><td>2, 6</td></tr><tr><td>2</td><td>1, 8</td></tr><tr><td>3</td><td>3, 8</td></tr><tr><td>4</td><td>1, 5, 5, 9</td></tr><tr><td>5</td><td>7</td></tr><tr><td>6</td><td>4, 6, 9</td></tr><tr><td>7</td><td>8, 9</td></tr><tr><td>8</td><td>0</td></tr><tr><td>9</td><td>0, 1, 2, 2, 4</td></tr></table> |
+| <table><tr><td>Date</td><td>16-01-2023</td></tr><tr><td>Special</td><td>48260</td></tr><tr><td>First</td><td>83587</td></tr><tr><td>Second</td><td>79324, 24955</td></tr><tr><td rowspan="2">Third</td><td>97698, 03474, 79118</td></tr><tr><td>27721, 67766, 60068</td></tr><tr><td>Fourth</td><td>9999, 2793, 8423, 8738</td></tr><tr><td rowspan="2">Fifth</td><td>6232, 7156, 7587</td></tr><tr><td>1067, 6779, 6885</td></tr><tr><td>Sixth</td><td>456, 695, 805</td></tr><tr><td>Seventh</td><td>53, 07, 71, 23</td></tr></table> | <table><tr><td>First</td><td>Last</td></tr><tr><td>0</td><td>5, 7</td></tr><tr><td>1</td><td>8</td></tr><tr><td>2</td><td>1, 3, 3, 4</td></tr><tr><td>3</td><td>2, 8</td></tr><tr><td>4</td><td>-</td></tr><tr><td>5</td><td>3, 5, 6, 6</td></tr><tr><td>6</td><td>0, 6, 7, 8</td></tr><tr><td>7</td><td>1, 4, 9</td></tr><tr><td>8</td><td>5, 7, 7</td></tr><tr><td>9</td><td>3, 5, 8, 9</td></tr></table> |
 
 <h2>Analysis of one-year results</h2>
 
-Max: 126. Min: 73.
+Max: 125. Min: 73.
 
-Mean: 97.47. Standard deviation: 11.5.
+Mean: 97.47. Standard deviation: 11.48.
 
 <h3>Detail</h3>
 
