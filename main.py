@@ -202,3 +202,24 @@ if __name__ == '__main__':
     ax.vlines(mean + 2*std, 0, np.interp(mean + 2*std, xs, ys), color='red', linestyles='dotted')
     ax.set_title('Distribution')
     fig.savefig('images/distribution.jpg')
+
+    # Last appearing
+
+    predict_date = small_results['date'].max() + pd.Timedelta(days=1)
+    numbers = small_results.melt(id_vars='date', var_name='prize', value_name='value')
+    numbers['value'] = numbers['value'] % 100
+    last_appearing = numbers.groupby(['value'])['date'].max()
+    last_appearing = last_appearing.to_frame()
+    last_appearing.reset_index()
+    last_appearing['delta'] = predict_date - last_appearing['date']
+    last_appearing['delta'] = last_appearing['delta'].dt.days
+
+    last_appearing['tens'] = last_appearing.index // 10
+    last_appearing['ones'] = last_appearing.index % 10
+    last_appearing = last_appearing[['tens', 'ones', 'delta']]
+    last_appearing = last_appearing.pivot(index='tens', columns='ones', values='delta')
+
+    fig, ax = plt.subplots()
+    sns.heatmap(last_appearing, annot=True, fmt='d', cmap='RdYlGn', ax=ax)
+    ax.set_title('Delta')
+    fig.savefig('images/delta.jpg')
