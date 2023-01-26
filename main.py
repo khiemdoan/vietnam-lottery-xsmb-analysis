@@ -114,9 +114,9 @@ if __name__ == '__main__':
         try:
             row = fetch_result(selected_date)
             print(row.iloc[0].tolist())
+            results = pd.concat([results, row])
         except Exception as ex:
             logging.exception(ex)
-        results = pd.concat([results, row])
         sleep(0.1)
 
     results.to_csv(file_path, index=False)
