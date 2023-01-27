@@ -217,13 +217,26 @@ if __name__ == '__main__':
     last_appearing = last_appearing.to_frame()
     last_appearing.reset_index()
     last_appearing['delta'] = predict_index - last_appearing['index']
+    last_appearing.drop('index', axis=1, inplace=True)
 
-    last_appearing['tens'] = last_appearing.index // 10
-    last_appearing['ones'] = last_appearing.index % 10
-    last_appearing = last_appearing[['tens', 'ones', 'delta']]
-    last_appearing = last_appearing.pivot(index='tens', columns='ones', values='delta')
+    heatmap_data = last_appearing.copy()
+    heatmap_data['tens'] = heatmap_data.index // 10
+    heatmap_data['ones'] = heatmap_data.index % 10
+    heatmap_data = heatmap_data[['tens', 'ones', 'delta']]
+    heatmap_data = heatmap_data.pivot(index='tens', columns='ones', values='delta')
 
-    fig, ax = plt.subplots()
-    sns.heatmap(last_appearing, annot=True, fmt='d', cmap='RdYlGn', ax=ax)
-    ax.set_title('Delta')
-    fig.savefig('images/delta.jpg')
+    bar_data = last_appearing.sort_values('delta', ascending=False)
+    bar_data = bar_data.iloc[:10, :]
+    bar_data.reset_index(inplace=True)
+    bar_data = bar_data.rename(columns = {'index': 'value'})
+    bar_data['value'] = bar_data['value'].apply(lambda r: f'{r:02d}')
+
+    fig, (ax1, ax2) = plt.subplots(ncols=2, figsize=(25, 10))
+    sns.heatmap(heatmap_data, annot=True, fmt='d', cmap='RdYlGn', ax=ax1)
+    ax1.set_title('Delta')
+    palette = reversed(colors_from_values(bar_data['delta'], 'summer'))
+    sns.barplot(bar_data, x='value', y='delta', palette=palette, ax=ax2)
+    for bar in ax2.containers:
+        ax2.bar_label(bar, fmt='%d')
+    ax2.set_title('Top 10')
+    fig.savefig('images/delta.jpg', bbox_inches='tight', pad_inches=0.8)
