@@ -231,12 +231,15 @@ if __name__ == '__main__':
     bar_data = bar_data.rename(columns = {'index': 'value'})
     bar_data['value'] = bar_data['value'].apply(lambda r: f'{r:02d}')
 
-    fig, (ax1, ax2) = plt.subplots(ncols=2, figsize=(25, 10))
-    sns.heatmap(heatmap_data, annot=True, fmt='d', cmap='RdYlGn', ax=ax1)
-    ax1.set_title('Delta')
+    fig, ax = plt.subplots()
+    sns.heatmap(heatmap_data, annot=True, fmt='d', cmap='RdYlGn', ax=ax)
+    ax.set_title('Delta')
+    fig.savefig('images/delta.jpg')
+
+    fig, ax = plt.subplots()
     palette = reversed(colors_from_values(bar_data['delta'], 'summer'))
-    sns.barplot(bar_data, x='value', y='delta', palette=palette, ax=ax2)
-    for bar in ax2.containers:
-        ax2.bar_label(bar, fmt='%d')
-    ax2.set_title('Top 10')
-    fig.savefig('images/delta.jpg', bbox_inches='tight', pad_inches=0.8)
+    sns.barplot(bar_data, x='value', y='delta', palette=palette, ax=ax)
+    for bar in ax.containers:
+        ax.bar_label(bar, fmt='%d')
+    ax.set_title('Top 10')
+    fig.savefig('images/delta_top_10.jpg')
