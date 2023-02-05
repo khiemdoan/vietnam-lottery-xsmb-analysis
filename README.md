@@ -4,13 +4,13 @@ Using GitHub Action to automatically fetch and analyze results of the Vietnam lo
 
 | Lotery      | Loto |
 | :-----------: | :-----------: |
-| <table><tr><td>Date</td><td>04-02-2023</td></tr><tr><td>Special</td><td>64948</td></tr><tr><td>First</td><td>04674</td></tr><tr><td>Second</td><td>16883, 77334</td></tr><tr><td rowspan="2">Third</td><td>12795, 68347, 65312</td></tr><tr><td>09038, 86560, 22314</td></tr><tr><td>Fourth</td><td>2746, 8474, 2057, 3300</td></tr><tr><td rowspan="2">Fifth</td><td>5264, 2363, 1877</td></tr><tr><td>0033, 2488, 9198</td></tr><tr><td>Sixth</td><td>104, 622, 010</td></tr><tr><td>Seventh</td><td>77, 06, 18, 96</td></tr></table> | <table><tr><td>First</td><td>Last</td></tr><tr><td>0</td><td>0, 4, 6</td></tr><tr><td>1</td><td>0, 2, 4, 8</td></tr><tr><td>2</td><td>2</td></tr><tr><td>3</td><td>3, 4, 8</td></tr><tr><td>4</td><td>6, 7, 8</td></tr><tr><td>5</td><td>7</td></tr><tr><td>6</td><td>0, 3, 4</td></tr><tr><td>7</td><td>4, 4, 7, 7</td></tr><tr><td>8</td><td>3, 8</td></tr><tr><td>9</td><td>5, 6, 8</td></tr></table> |
+| <table><tr><td>Date</td><td>05-02-2023</td></tr><tr><td>Special</td><td>06194</td></tr><tr><td>First</td><td>41299</td></tr><tr><td>Second</td><td>35133, 39473</td></tr><tr><td rowspan="2">Third</td><td>40420, 29343, 31064</td></tr><tr><td>66278, 59129, 16617</td></tr><tr><td>Fourth</td><td>7037, 9260, 2809, 5294</td></tr><tr><td rowspan="2">Fifth</td><td>7690, 7727, 6959</td></tr><tr><td>0095, 1920, 7180</td></tr><tr><td>Sixth</td><td>078, 772, 457</td></tr><tr><td>Seventh</td><td>85, 74, 31, 79</td></tr></table> | <table><tr><td>First</td><td>Last</td></tr><tr><td>0</td><td>9</td></tr><tr><td>1</td><td>7</td></tr><tr><td>2</td><td>0, 0, 7, 9</td></tr><tr><td>3</td><td>1, 3, 7</td></tr><tr><td>4</td><td>3</td></tr><tr><td>5</td><td>7, 9</td></tr><tr><td>6</td><td>0, 4</td></tr><tr><td>7</td><td>2, 3, 4, 8, 8, 9</td></tr><tr><td>8</td><td>0, 5</td></tr><tr><td>9</td><td>0, 4, 4, 5, 9</td></tr></table> |
 
 <h2>Analysis of one-year results</h2>
 
 Max: 124. Min: 73.
 
-Mean: 97.47. Standard deviation: 11.55.
+Mean: 97.47. Standard deviation: 11.64.
 
 <h3>Detail</h3>
 
