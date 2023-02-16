@@ -123,6 +123,20 @@ if __name__ == '__main__':
     print(f'Saved data: {results.shape}')
 
     last_date = pd.to_datetime(last_date)
+    start_date = pd.Timestamp(year=last_date.year-3, month=last_date.month, day=last_date.day)
+
+    small_results = results[(start_date < results['date']) & (results['date'] <= last_date)]
+    small_results.reset_index(drop=True, inplace=True)
+    small_results.to_csv('results/xsmb_3_year.csv', index=False)
+
+    last_date = pd.to_datetime(last_date)
+    start_date = pd.Timestamp(year=last_date.year-2, month=last_date.month, day=last_date.day)
+
+    small_results = results[(start_date < results['date']) & (results['date'] <= last_date)]
+    small_results.reset_index(drop=True, inplace=True)
+    small_results.to_csv('results/xsmb_2_year.csv', index=False)
+
+    last_date = pd.to_datetime(last_date)
     start_date = pd.Timestamp(year=last_date.year-1, month=last_date.month, day=last_date.day)
 
     small_results = results[(start_date < results['date']) & (results['date'] <= last_date)]
