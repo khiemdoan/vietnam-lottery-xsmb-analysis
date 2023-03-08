@@ -2,15 +2,23 @@
 
 Using GitHub Action to automatically fetch and analyze results of the Vietnam lottery daily.
 
+Download:
+
+* [Full data](https://raw.githubusercontent.com/khiemdoan/vietnam-lottery-xsmb-analysis/main/results/xsmb.csv)
+* [1-year result](https://raw.githubusercontent.com/khiemdoan/vietnam-lottery-xsmb-analysis/main/results/xsmb_1_year.csv)
+* [2-year result](https://raw.githubusercontent.com/khiemdoan/vietnam-lottery-xsmb-analysis/main/results/xsmb_2_year.csv)
+* [3-year result](https://raw.githubusercontent.com/khiemdoan/vietnam-lottery-xsmb-analysis/main/results/xsmb_3_year.csv)
+* [4-year result](https://raw.githubusercontent.com/khiemdoan/vietnam-lottery-xsmb-analysis/main/results/xsmb_5_year.csv)
+
 | Lotery      | Loto |
 | :-----------: | :-----------: |
-| <table><tr><td>Date</td><td>07-03-2023</td></tr><tr><td>Special</td><td>75877</td></tr><tr><td>First</td><td>08692</td></tr><tr><td>Second</td><td>87361, 31241</td></tr><tr><td rowspan="2">Third</td><td>06055, 87073, 97510</td></tr><tr><td>52584, 52539, 03248</td></tr><tr><td>Fourth</td><td>9565, 5285, 8430, 3314</td></tr><tr><td rowspan="2">Fifth</td><td>4666, 6378, 7540</td></tr><tr><td>2000, 6823, 1143</td></tr><tr><td>Sixth</td><td>444, 841, 655</td></tr><tr><td>Seventh</td><td>00, 04, 38, 45</td></tr></table> | <table><tr><td>First</td><td>Last</td></tr><tr><td>0</td><td>0, 0, 4</td></tr><tr><td>1</td><td>0, 4</td></tr><tr><td>2</td><td>3</td></tr><tr><td>3</td><td>0, 8, 9</td></tr><tr><td>4</td><td>0, 1, 1, 3, 4, 5, 8</td></tr><tr><td>5</td><td>5, 5</td></tr><tr><td>6</td><td>1, 5, 6</td></tr><tr><td>7</td><td>3, 7, 8</td></tr><tr><td>8</td><td>4, 5</td></tr><tr><td>9</td><td>2</td></tr></table> |
+| <table><tr><td>Date</td><td>08-03-2023</td></tr><tr><td>Special</td><td>73787</td></tr><tr><td>First</td><td>06261</td></tr><tr><td>Second</td><td>48267, 37696</td></tr><tr><td rowspan="2">Third</td><td>25011, 20381, 31012</td></tr><tr><td>72359, 95514, 05128</td></tr><tr><td>Fourth</td><td>8426, 8924, 7256, 4224</td></tr><tr><td rowspan="2">Fifth</td><td>9581, 4713, 2690</td></tr><tr><td>3000, 8935, 3073</td></tr><tr><td>Sixth</td><td>905, 189, 094</td></tr><tr><td>Seventh</td><td>81, 62, 59, 02</td></tr></table> | <table><tr><td>First</td><td>Last</td></tr><tr><td>0</td><td>0, 2, 5</td></tr><tr><td>1</td><td>1, 2, 3, 4</td></tr><tr><td>2</td><td>4, 4, 6, 8</td></tr><tr><td>3</td><td>5</td></tr><tr><td>4</td><td>-</td></tr><tr><td>5</td><td>6, 9, 9</td></tr><tr><td>6</td><td>1, 2, 7</td></tr><tr><td>7</td><td>3</td></tr><tr><td>8</td><td>1, 1, 1, 7, 9</td></tr><tr><td>9</td><td>0, 4, 6</td></tr></table> |
 
 <h2>Analysis of one-year results</h2>
 
-Max: 124. Min: 71.
+Max: 124. Min: 74.
 
-Mean: 97.47. Standard deviation: 11.76.
+Mean: 97.47. Standard deviation: 11.64.
 
 <h3>Detail</h3>
 
