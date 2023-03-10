@@ -12,13 +12,24 @@ Download:
 
 | Lotery      | Loto |
 | :-----------: | :-----------: |
-| <table><tr><td>Date</td><td>09-03-2023</td></tr><tr><td>Special</td><td>68205</td></tr><tr><td>First</td><td>60388</td></tr><tr><td>Second</td><td>32503, 77792</td></tr><tr><td rowspan="2">Third</td><td>69127, 59764, 69821</td></tr><tr><td>57609, 39073, 81374</td></tr><tr><td>Fourth</td><td>5421, 3336, 3075, 0339</td></tr><tr><td rowspan="2">Fifth</td><td>0433, 8377, 5578</td></tr><tr><td>0355, 0713, 1038</td></tr><tr><td>Sixth</td><td>147, 834, 427</td></tr><tr><td>Seventh</td><td>51, 56, 78, 37</td></tr></table> | <table><tr><td>First</td><td>Last</td></tr><tr><td>0</td><td>3, 5, 9</td></tr><tr><td>1</td><td>3</td></tr><tr><td>2</td><td>1, 1, 7, 7</td></tr><tr><td>3</td><td>3, 4, 6, 7, 8, 9</td></tr><tr><td>4</td><td>7</td></tr><tr><td>5</td><td>1, 5, 6</td></tr><tr><td>6</td><td>4</td></tr><tr><td>7</td><td>3, 4, 5, 7, 8, 8</td></tr><tr><td>8</td><td>8</td></tr><tr><td>9</td><td>2</td></tr></table> |
+| <table><tr><td>Date</td><td>10-03-2023</td></tr><tr><td>Special</td><td>24420</td></tr><tr><td>First</td><td>64647</td></tr><tr><td>Second</td><td>92456, 73117</td></tr><tr><td rowspan="2">Third</td><td>43430, 17679, 18857</td></tr><tr><td>58788, 06086, 56612</td></tr><tr><td>Fourth</td><td>6449, 3646, 0895, 3184</td></tr><tr><td rowspan="2">Fifth</td><td>9301, 4549, 8069</td></tr><tr><td>7225, 3674, 8235</td></tr><tr><td>Sixth</td><td>810, 645, 849</td></tr><tr><td>Seventh</td><td>97, 07, 58, 81</td></tr></table> | <table><tr><td>First</td><td>Last</td></tr><tr><td>0</td><td>1, 7</td></tr><tr><td>1</td><td>0, 2, 7</td></tr><tr><td>2</td><td>0, 5</td></tr><tr><td>3</td><td>0, 5</td></tr><tr><td>4</td><td>5, 6, 7, 9, 9, 9</td></tr><tr><td>5</td><td>6, 7, 8</td></tr><tr><td>6</td><td>9</td></tr><tr><td>7</td><td>4, 9</td></tr><tr><td>8</td><td>1, 4, 6, 8</td></tr><tr><td>9</td><td>5, 7</td></tr></table> |
+
+
+<h2>Analysis of special prices</h2>
+
+<h3>Amount of day from last appearing</h3>
+
+![Delta](images/special_delta.jpg)
+
+<h3>Top 10 amount of day from last appearing</h3>
+
+![Delta top 10](images/special_delta_top_10.jpg)
 
 <h2>Analysis of one-year results</h2>
 
-Max: 124. Min: 74.
+Max: 124. Min: 75.
 
-Mean: 97.47. Standard deviation: 11.58.
+Mean: 97.47. Standard deviation: 11.55.
 
 <h3>Detail</h3>
 
