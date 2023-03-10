@@ -84,6 +84,45 @@ def colors_from_values(values, palette_name):
     return np.array(palette).take(indices, axis=0)
 
 
+def last_appearing_special(data):
+    numbers = data[['special']]
+    numbers.reset_index(inplace=True)
+    predict_index = numbers['index'].max() + 1
+
+    numbers = numbers.melt(id_vars='index', var_name='prize', value_name='value')
+    numbers['value'] = numbers['value'] % 100
+    last_appearing = numbers.groupby(['value'])['index'].max()
+    last_appearing = last_appearing.to_frame()
+    last_appearing.reset_index()
+    last_appearing['delta'] = predict_index - last_appearing['index']
+    last_appearing.drop('index', axis=1, inplace=True)
+
+    heatmap_data = last_appearing.copy()
+    heatmap_data['tens'] = heatmap_data.index // 10
+    heatmap_data['ones'] = heatmap_data.index % 10
+    heatmap_data = heatmap_data[['tens', 'ones', 'delta']]
+    heatmap_data = heatmap_data.pivot(index='tens', columns='ones', values='delta')
+
+    bar_data = last_appearing.sort_values('delta', ascending=False)
+    bar_data = bar_data.iloc[:10, :]
+    bar_data.reset_index(inplace=True)
+    bar_data = bar_data.rename(columns = {'index': 'value'})
+    bar_data['value'] = bar_data['value'].apply(lambda r: f'{r:02d}')
+
+    fig, ax = plt.subplots()
+    sns.heatmap(heatmap_data, annot=True, fmt='d', cmap='RdYlGn', ax=ax)
+    ax.set_title('Delta')
+    fig.savefig('images/special_delta.jpg')
+
+    fig, ax = plt.subplots()
+    palette = reversed(colors_from_values(bar_data['delta'], 'summer'))
+    sns.barplot(bar_data, x='value', y='delta', palette=palette, ax=ax)
+    for bar in ax.containers:
+        ax.bar_label(bar, fmt='%d')
+    ax.set_title('Top 10')
+    fig.savefig('images/special_delta_top_10.jpg')
+
+
 def last_appearing_loto(data):
     numbers = data.drop('date', axis=1)
     numbers.reset_index(inplace=True)
@@ -185,6 +224,9 @@ if __name__ == '__main__':
     small_results = results[(start_date < results['date']) & (results['date'] <= last_date)]
     small_results.reset_index(drop=True, inplace=True)
     small_results.to_csv('results/xsmb_1_year.csv', index=False)
+
+    # Last appearing Special price
+    last_appearing_special(results_2_year)
 
     recent_results = small_results.iloc[-1].values[1:]
     recent_results = recent_results % 100
