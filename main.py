@@ -84,7 +84,7 @@ def colors_from_values(values, palette_name):
     return np.array(palette).take(indices, axis=0)
 
 
-def last_appearing_special(data):
+def last_appearing_special(data: pd.DataFrame, type: str):
     numbers = data[['special']]
     numbers.reset_index(inplace=True)
     predict_index = numbers['index'].max() + 1
@@ -226,7 +226,7 @@ if __name__ == '__main__':
     small_results.to_csv('results/xsmb_1_year.csv', index=False)
 
     # Last appearing Special price
-    last_appearing_special(results_2_year)
+    last_appearing_special(results_2_year, 'tail_special')
 
     recent_results = small_results.iloc[-1].values[1:]
     recent_results = recent_results % 100
