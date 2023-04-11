@@ -12,7 +12,7 @@ Download:
 
 | Lotery      | Loto |
 | :-----------: | :-----------: |
-| <table><tr><td>Date</td><td>10-04-2023</td></tr><tr><td>Special</td><td>06363</td></tr><tr><td>First</td><td>75304</td></tr><tr><td>Second</td><td>29505, 25800</td></tr><tr><td rowspan="2">Third</td><td>33432, 51472, 46580</td></tr><tr><td>24161, 76595, 98352</td></tr><tr><td>Fourth</td><td>7743, 7403, 1859, 9221</td></tr><tr><td rowspan="2">Fifth</td><td>3187, 2855, 8646</td></tr><tr><td>8584, 0256, 8458</td></tr><tr><td>Sixth</td><td>352, 139, 219</td></tr><tr><td>Seventh</td><td>13, 54, 34, 96</td></tr></table> | <table><tr><td>First</td><td>Last</td></tr><tr><td>0</td><td>0, 3, 4, 5</td></tr><tr><td>1</td><td>3, 9</td></tr><tr><td>2</td><td>1</td></tr><tr><td>3</td><td>2, 4, 9</td></tr><tr><td>4</td><td>3, 6</td></tr><tr><td>5</td><td>2, 2, 4, 5, 6, 8, 9</td></tr><tr><td>6</td><td>1, 3</td></tr><tr><td>7</td><td>2</td></tr><tr><td>8</td><td>0, 4, 7</td></tr><tr><td>9</td><td>5, 6</td></tr></table> |
+| <table><tr><td>Date</td><td>11-04-2023</td></tr><tr><td>Special</td><td>16039</td></tr><tr><td>First</td><td>40045</td></tr><tr><td>Second</td><td>88796, 43516</td></tr><tr><td rowspan="2">Third</td><td>95785, 28723, 74468</td></tr><tr><td>18671, 71440, 99436</td></tr><tr><td>Fourth</td><td>8150, 0958, 7169, 4771</td></tr><tr><td rowspan="2">Fifth</td><td>1017, 5415, 7626</td></tr><tr><td>9898, 1360, 9496</td></tr><tr><td>Sixth</td><td>489, 632, 860</td></tr><tr><td>Seventh</td><td>22, 64, 26, 84</td></tr></table> | <table><tr><td>First</td><td>Last</td></tr><tr><td>0</td><td>-</td></tr><tr><td>1</td><td>5, 6, 7</td></tr><tr><td>2</td><td>2, 3, 6, 6</td></tr><tr><td>3</td><td>2, 6, 9</td></tr><tr><td>4</td><td>0, 5</td></tr><tr><td>5</td><td>0, 8</td></tr><tr><td>6</td><td>0, 0, 4, 8, 9</td></tr><tr><td>7</td><td>1, 1</td></tr><tr><td>8</td><td>4, 5, 9</td></tr><tr><td>9</td><td>6, 6, 8</td></tr></table> |
 
 
 <h2>Analysis of special prices</h2>
@@ -29,7 +29,7 @@ Download:
 
 Max: 120. Min: 75.
 
-Mean: 97.47. Standard deviation: 11.07.
+Mean: 97.47. Standard deviation: 10.94.
 
 <h3>Detail</h3>
 
