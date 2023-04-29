@@ -112,6 +112,7 @@ def download_data() -> tuple[pd.DataFrame, pd.DataFrame]:
     last_date = now.date()
     if now.time() < time(18, 35):
         last_date -= timedelta(days=1)
+    last_date = pd.to_datetime(last_date)
 
     delta = (last_date - start_date).days + 1
     for i in range(delta):
@@ -130,25 +131,21 @@ def download_data() -> tuple[pd.DataFrame, pd.DataFrame]:
     results.to_csv(file_path, index=False)
     print(f'Saved data: {results.shape}')
 
-    last_date = pd.to_datetime(last_date)
     start_date = pd.Timestamp(year=last_date.year-5, month=last_date.month, day=last_date.day)
     results_5_year = results[(start_date < results['date']) & (results['date'] <= last_date)]
     results_5_year.reset_index(drop=True, inplace=True)
     results_5_year.to_csv('results/xsmb_5_year.csv', index=False)
 
-    last_date = pd.to_datetime(last_date)
     start_date = pd.Timestamp(year=last_date.year-3, month=last_date.month, day=last_date.day)
     results_3_year = results[(start_date < results['date']) & (results['date'] <= last_date)]
     results_3_year.reset_index(drop=True, inplace=True)
     results_3_year.to_csv('results/xsmb_3_year.csv', index=False)
 
-    last_date = pd.to_datetime(last_date)
     start_date = pd.Timestamp(year=last_date.year-2, month=last_date.month, day=last_date.day)
     results_2_year = results[(start_date < results['date']) & (results['date'] <= last_date)]
     results_2_year.reset_index(drop=True, inplace=True)
     results_2_year.to_csv('results/xsmb_2_year.csv', index=False)
 
-    last_date = pd.to_datetime(last_date)
     start_date = pd.Timestamp(year=last_date.year-1, month=last_date.month, day=last_date.day)
     small_results = results[(start_date < results['date']) & (results['date'] <= last_date)]
     small_results.reset_index(drop=True, inplace=True)
