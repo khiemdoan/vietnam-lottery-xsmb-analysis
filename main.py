@@ -44,11 +44,11 @@ def load_sparse_results(path: Path) -> pd.DataFrame:
     try:
         results = pd.read_csv(path)
     except (FileNotFoundError, pd.errors.EmptyDataError):
-        columns = ['date'] + [f'{i}' for i in range(100)]
+        columns = ['date'] + [i for i in range(100)]
         results = pd.DataFrame(columns=columns)
 
     results['date'] = pd.to_datetime(results['date'])
-    results.iloc[:, 1:] = results.iloc[:, 1:].astype('int64')
+    results.iloc[:, 1:] = results.iloc[:, 1:].astype('float64')
     return results
 
 
@@ -112,7 +112,6 @@ def download_data() -> tuple[pd.DataFrame, pd.DataFrame]:
     last_date = now.date()
     if now.time() < time(18, 35):
         last_date -= timedelta(days=1)
-    last_date = pd.to_datetime(last_date)
 
     delta = (last_date - start_date).days + 1
     for i in range(delta):
@@ -123,13 +122,24 @@ def download_data() -> tuple[pd.DataFrame, pd.DataFrame]:
         try:
             row = fetch_result(selected_date)
             print(row.iloc[0].tolist())
+
+            sparse = pd.concat([row.iloc[-1:, 0:1], pd.DataFrame(np.zeros((1, 100)))], axis=1)
+            numbers = row.iloc[-1, 1:] % 100
+            counts = numbers.value_counts()
+            for k, v in counts.items():
+                sparse[str(k)] = pd.to_numeric(v)
+
             results = pd.concat([results, row])
+            sparse_results = pd.concat([sparse_results, sparse])
         except Exception as ex:
             logging.exception(ex)
         sleep(0.1)
 
     results.to_csv(file_path, index=False)
+    sparse_results.to_csv(sparse_file_path, index=False)
     print(f'Saved data: {results.shape}')
+
+    last_date = pd.to_datetime(last_date)
 
     start_date = pd.Timestamp(year=last_date.year-5, month=last_date.month, day=last_date.day)
     results_5_year = results[(start_date < results['date']) & (results['date'] <= last_date)]
