@@ -127,7 +127,7 @@ def download_data() -> tuple[pd.DataFrame, pd.DataFrame]:
             numbers = row.iloc[-1, 1:] % 100
             counts = numbers.value_counts()
             for k, v in counts.items():
-                sparse[str(k)] = pd.to_numeric(v)
+                sparse[k] = pd.to_numeric(v)
 
             results = pd.concat([results, row])
             sparse_results = pd.concat([sparse_results, sparse])
