@@ -188,7 +188,8 @@ def last_appearing(data: pd.DataFrame, type: str):
     heatmap_data['tens'] = heatmap_data.index // 10
     heatmap_data['ones'] = heatmap_data.index % 10
     heatmap_data = heatmap_data[['tens', 'ones', 'delta']]
-    heatmap_data = heatmap_data.pivot(index='tens', columns='ones', values='delta')
+    heatmap_data = heatmap_data.pivot(index='tens', columns='ones', values='delta').fillna(0)
+    heatmap_data = heatmap_data.astype(int)
 
     bar_data = last_appearing.sort_values('delta', ascending=False)
     bar_data = bar_data.iloc[:10, :]
@@ -228,7 +229,8 @@ def last_appearing_loto(data):
     heatmap_data['tens'] = heatmap_data.index // 10
     heatmap_data['ones'] = heatmap_data.index % 10
     heatmap_data = heatmap_data[['tens', 'ones', 'delta']]
-    heatmap_data = heatmap_data.pivot(index='tens', columns='ones', values='delta')
+    heatmap_data = heatmap_data.pivot(index='tens', columns='ones', values='delta').fillna(0)
+    heatmap_data = heatmap_data.astype(int)
 
     bar_data = last_appearing.sort_values('delta', ascending=False)
     bar_data = bar_data.iloc[:10, :]
@@ -303,7 +305,8 @@ if __name__ == '__main__':
     heatmap_data['tens'] = heatmap_data['value'] // 10
     heatmap_data['ones'] = heatmap_data['value'] % 10
     heatmap_data = heatmap_data[['tens', 'ones', 'freq']]
-    heatmap_data = heatmap_data.pivot(index='tens', columns='ones', values='freq')
+    heatmap_data = heatmap_data.pivot(index='tens', columns='ones', values='freq').fillna(0)
+    heatmap_data = heatmap_data.astype(int)
 
     fig, ax = plt.subplots()
     sns.heatmap(heatmap_data, annot=True, fmt='d', cmap='RdYlGn', ax=ax)
