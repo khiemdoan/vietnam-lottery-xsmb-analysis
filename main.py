@@ -40,6 +40,18 @@ def load_results(path: Path) -> pd.DataFrame:
     return results
 
 
+def load_sparse_results(path: Path) -> pd.DataFrame:
+    try:
+        results = pd.read_csv(path)
+    except (FileNotFoundError, pd.errors.EmptyDataError):
+        columns = ['date'] + [i for i in range(100)]
+        results = pd.DataFrame(columns=columns)
+
+    results['date'] = pd.to_datetime(results['date'])
+    results.iloc[:, 1:] = results.iloc[:, 1:].astype('float64')
+    return results
+
+
 def fetch_result(selected_date: date) -> pd.DataFrame:
     url = f'https://xoso.com.vn/xsmb-{selected_date:%d-%m-%Y}.html'
     scraper = CloudScraper()
@@ -77,6 +89,82 @@ def fetch_result(selected_date: date) -> pd.DataFrame:
     return df
 
 
+def download_data() -> tuple[pd.DataFrame, pd.DataFrame]:
+    file_path = 'results/xsmb.csv'
+    sparse_file_path = 'results/xsmb_sparse.csv'
+
+    results = load_results(file_path)
+    sparse_results = load_sparse_results(sparse_file_path)
+
+    print(f'Loaded data: {results.shape}')
+
+    start_date = results['date'].max()
+    if pd.isnull(start_date):
+        start_date = date(2010, 1, 1)
+    else:
+        start_date = start_date.to_pydatetime()
+        start_date += timedelta(days=1)
+        start_date = start_date.date()
+
+    tz = timezone('Asia/Ho_Chi_Minh')
+    now = datetime.now(tz)
+
+    last_date = now.date()
+    if now.time() < time(18, 35):
+        last_date -= timedelta(days=1)
+
+    delta = (last_date - start_date).days + 1
+    for i in range(delta):
+        selected_date = start_date + timedelta(days=i)
+        if pd.to_datetime(selected_date) in results.index:
+            continue
+        print(f'Fetching: {selected_date}')
+        try:
+            row = fetch_result(selected_date)
+            print(row.iloc[0].tolist())
+
+            sparse = pd.concat([row.iloc[-1:, 0:1], pd.DataFrame(np.zeros((1, 100)))], axis=1)
+            sparse.columns = ['date'] + [str(i) for i in range(100)]
+            numbers = row.iloc[-1, 1:] % 100
+            counts = numbers.value_counts()
+            for k, v in counts.items():
+                sparse.iloc[0, k+1] = v
+
+            results = pd.concat([results, row])
+            sparse_results = pd.concat([sparse_results, sparse])
+        except Exception as ex:
+            logging.exception(ex)
+        sleep(0.1)
+
+    results.to_csv(file_path, index=False)
+    sparse_results.to_csv(sparse_file_path, index=False)
+    print(f'Saved data: {results.shape}')
+
+    last_date = pd.to_datetime(last_date)
+
+    start_date = pd.Timestamp(year=last_date.year-5, month=last_date.month, day=last_date.day)
+    results_5_year = results[(start_date < results['date']) & (results['date'] <= last_date)]
+    results_5_year.reset_index(drop=True, inplace=True)
+    results_5_year.to_csv('results/xsmb_5_year.csv', index=False)
+
+    start_date = pd.Timestamp(year=last_date.year-3, month=last_date.month, day=last_date.day)
+    results_3_year = results[(start_date < results['date']) & (results['date'] <= last_date)]
+    results_3_year.reset_index(drop=True, inplace=True)
+    results_3_year.to_csv('results/xsmb_3_year.csv', index=False)
+
+    start_date = pd.Timestamp(year=last_date.year-2, month=last_date.month, day=last_date.day)
+    results_2_year = results[(start_date < results['date']) & (results['date'] <= last_date)]
+    results_2_year.reset_index(drop=True, inplace=True)
+    results_2_year.to_csv('results/xsmb_2_year.csv', index=False)
+
+    start_date = pd.Timestamp(year=last_date.year-1, month=last_date.month, day=last_date.day)
+    small_results = results[(start_date < results['date']) & (results['date'] <= last_date)]
+    small_results.reset_index(drop=True, inplace=True)
+    small_results.to_csv('results/xsmb_1_year.csv', index=False)
+
+    return results, sparse_results
+
+
 def colors_from_values(values, palette_name):
     normalized = (values - min(values)) / (max(values) - min(values))
     indices = np.round(normalized * (len(values) - 1)).astype(np.int32)
@@ -101,7 +189,8 @@ def last_appearing(data: pd.DataFrame, type: str):
     heatmap_data['tens'] = heatmap_data.index // 10
     heatmap_data['ones'] = heatmap_data.index % 10
     heatmap_data = heatmap_data[['tens', 'ones', 'delta']]
-    heatmap_data = heatmap_data.pivot(index='tens', columns='ones', values='delta')
+    heatmap_data = heatmap_data.pivot(index='tens', columns='ones', values='delta').fillna(0)
+    heatmap_data = heatmap_data.astype(int)
 
     bar_data = last_appearing.sort_values('delta', ascending=False)
     bar_data = bar_data.iloc[:10, :]
@@ -141,7 +230,8 @@ def last_appearing_loto(data):
     heatmap_data['tens'] = heatmap_data.index // 10
     heatmap_data['ones'] = heatmap_data.index % 10
     heatmap_data = heatmap_data[['tens', 'ones', 'delta']]
-    heatmap_data = heatmap_data.pivot(index='tens', columns='ones', values='delta')
+    heatmap_data = heatmap_data.pivot(index='tens', columns='ones', values='delta').fillna(0)
+    heatmap_data = heatmap_data.astype(int)
 
     bar_data = last_appearing.sort_values('delta', ascending=False)
     bar_data = bar_data.iloc[:10, :]
@@ -164,62 +254,13 @@ def last_appearing_loto(data):
 
 
 if __name__ == '__main__':
-    file_path = 'results/xsmb.csv'
+    results, sparse_results = download_data()
 
-    results = load_results(file_path)
-    print(f'Loaded data: {results.shape}')
+    last_date = results['date'].max()
 
-    start_date = results['date'].max()
-    if pd.isnull(start_date):
-        start_date = date(2010, 1, 1)
-    else:
-        start_date = start_date.to_pydatetime()
-        start_date += timedelta(days=1)
-        start_date = start_date.date()
-
-    tz = timezone('Asia/Ho_Chi_Minh')
-    now = datetime.now(tz)
-
-    last_date = now.date()
-    if now.time() < time(18, 35):
-        last_date -= timedelta(days=1)
-
-    delta = (last_date - start_date).days + 1
-    for i in range(delta):
-        selected_date = start_date + timedelta(days=i)
-        if pd.to_datetime(selected_date) in results.index:
-            continue
-        print(f'Fetching: {selected_date}')
-        try:
-            row = fetch_result(selected_date)
-            print(row.iloc[0].tolist())
-            results = pd.concat([results, row])
-        except Exception as ex:
-            logging.exception(ex)
-        sleep(0.1)
-
-    results.to_csv(file_path, index=False)
-    print(f'Saved data: {results.shape}')
-
-    last_date = pd.to_datetime(last_date)
-    start_date = pd.Timestamp(year=last_date.year-5, month=last_date.month, day=last_date.day)
-    results_5_year = results[(start_date < results['date']) & (results['date'] <= last_date)]
-    results_5_year.reset_index(drop=True, inplace=True)
-    results_5_year.to_csv('results/xsmb_5_year.csv', index=False)
-
-    last_date = pd.to_datetime(last_date)
-    start_date = pd.Timestamp(year=last_date.year-3, month=last_date.month, day=last_date.day)
-    results_3_year = results[(start_date < results['date']) & (results['date'] <= last_date)]
-    results_3_year.reset_index(drop=True, inplace=True)
-    results_3_year.to_csv('results/xsmb_3_year.csv', index=False)
-
-    last_date = pd.to_datetime(last_date)
     start_date = pd.Timestamp(year=last_date.year-2, month=last_date.month, day=last_date.day)
     results_2_year = results[(start_date < results['date']) & (results['date'] <= last_date)]
     results_2_year.reset_index(drop=True, inplace=True)
-    results_2_year.to_csv('results/xsmb_2_year.csv', index=False)
-
-    last_date = pd.to_datetime(last_date)
     start_date = pd.Timestamp(year=last_date.year-1, month=last_date.month, day=last_date.day)
     small_results = results[(start_date < results['date']) & (results['date'] <= last_date)]
     small_results.reset_index(drop=True, inplace=True)
@@ -265,7 +306,8 @@ if __name__ == '__main__':
     heatmap_data['tens'] = heatmap_data['value'] // 10
     heatmap_data['ones'] = heatmap_data['value'] % 10
     heatmap_data = heatmap_data[['tens', 'ones', 'freq']]
-    heatmap_data = heatmap_data.pivot(index='tens', columns='ones', values='freq')
+    heatmap_data = heatmap_data.pivot(index='tens', columns='ones', values='freq').fillna(0)
+    heatmap_data = heatmap_data.astype(int)
 
     fig, ax = plt.subplots()
     sns.heatmap(heatmap_data, annot=True, fmt='d', cmap='RdYlGn', ax=ax)
