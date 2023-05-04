@@ -98,7 +98,10 @@ def download_data() -> tuple[pd.DataFrame, pd.DataFrame]:
 
     print(f'Loaded data: {results.shape}')
 
-    start_date = results['date'].max()
+    start_date_results = results['date'].max()
+    start_date_sparse_results = sparse_results['date'].max()
+    start_date = min(start_date_results, start_date_sparse_results)
+
     if pd.isnull(start_date):
         start_date = date(2010, 1, 1)
     else:
@@ -116,8 +119,6 @@ def download_data() -> tuple[pd.DataFrame, pd.DataFrame]:
     delta = (last_date - start_date).days + 1
     for i in range(delta):
         selected_date = start_date + timedelta(days=i)
-        if pd.to_datetime(selected_date) in results.index:
-            continue
         print(f'Fetching: {selected_date}')
         try:
             row = fetch_result(selected_date)
@@ -130,8 +131,10 @@ def download_data() -> tuple[pd.DataFrame, pd.DataFrame]:
             for k, v in counts.items():
                 sparse.iloc[0, k+1] = v
 
-            results = pd.concat([results, row])
-            sparse_results = pd.concat([sparse_results, sparse])
+            if pd.to_datetime(selected_date) not in results['date'].unique():
+                results = pd.concat([results, row])
+            if pd.to_datetime(selected_date) not in sparse_results['date'].unique():
+                sparse_results = pd.concat([sparse_results, sparse])
         except Exception as ex:
             logging.exception(ex)
         sleep(0.1)
