@@ -140,6 +140,7 @@ def download_data() -> tuple[pd.DataFrame, pd.DataFrame]:
         sleep(0.1)
 
     results.to_csv(file_path, index=False)
+    sparse_results[sparse_results.columns[1:]] = sparse_results[sparse_results.columns[1:]].astype(int)
     sparse_results.to_csv(sparse_file_path, index=False)
     print(f'Saved data: {results.shape}')
 
