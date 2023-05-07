@@ -265,10 +265,10 @@ if __name__ == '__main__':
     start_date = pd.Timestamp(year=last_date.year-2, month=last_date.month, day=last_date.day)
     results_2_year = results[(start_date < results['date']) & (results['date'] <= last_date)]
     results_2_year.reset_index(drop=True, inplace=True)
+
     start_date = pd.Timestamp(year=last_date.year-1, month=last_date.month, day=last_date.day)
     small_results = results[(start_date < results['date']) & (results['date'] <= last_date)]
     small_results.reset_index(drop=True, inplace=True)
-    small_results.to_csv('results/xsmb_1_year.csv', index=False)
 
     # Last appearing Special price
     last_appearing(results_2_year, 'tail_special')
