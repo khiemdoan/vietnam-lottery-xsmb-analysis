@@ -282,11 +282,15 @@ if __name__ == '__main__':
         category = ', '.join(category) if len(category) > 0 else '-'
         loto_result.append(category)
 
-    numbers = small_results.drop(columns=['date'])
-    numbers = numbers % 100
-    numbers = numbers.stack()
+    last_date = sparse_results['date'].max()
 
-    counts = numbers.value_counts()
+    start_date = pd.Timestamp(year=last_date.year-1, month=last_date.month, day=last_date.day)
+    sparse_results_1_year = sparse_results[(start_date < sparse_results['date']) & (sparse_results['date'] <= last_date)]
+    sparse_results_1_year.reset_index(drop=True, inplace=True)
+
+    sparse_results_1_year = sparse_results_1_year.drop(columns=['date'])
+    counts = sparse_results_1_year.sum(axis=0)
+
     max_count = counts.max().round(2)
     min_count = counts.min().round(2)
     mean = counts.mean().round(2)
@@ -303,6 +307,8 @@ if __name__ == '__main__':
 
     counts = counts.reset_index()
     counts.columns = ['value', 'freq']
+    counts = counts.astype({'value': int})
+    counts.sort_values('freq', ascending=False, inplace=True)
 
     # Detail plot
 
