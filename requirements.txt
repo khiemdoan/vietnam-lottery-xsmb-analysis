@@ -1,9 +1,10 @@
 pytz==2023.3
-cloudscraper==1.2.69
-beautifulsoup4==4.12.0
-html5lib==1.1
-pandas==2.0.0
-numpy==1.24.2
+cloudscraper==1.2.71
+beautifulsoup4==4.12.2
+lxml==4.9.2
+numpy==1.24.3
+pandas==2.0.2
+numba==0.57.0
 matplotlib==3.7.1
 seaborn==0.12.2
 jinja2==3.1.2

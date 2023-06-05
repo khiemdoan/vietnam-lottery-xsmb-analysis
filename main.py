@@ -56,7 +56,7 @@ def fetch_result(selected_date: date) -> pd.DataFrame:
     url = f'https://xoso.com.vn/xsmb-{selected_date:%d-%m-%Y}.html'
     scraper = CloudScraper()
     response = scraper.get(url)
-    soup = BeautifulSoup(response.text, 'html5lib')
+    soup = BeautifulSoup(response.text, 'lxml')
     prizes = soup.find_all(attrs={'class': 'special-prize'})
     special = [int(p.text) for p in prizes]
     prizes = soup.find_all(attrs={'class': 'prize1'})
