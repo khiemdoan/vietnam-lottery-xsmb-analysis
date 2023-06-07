@@ -4,6 +4,7 @@ beautifulsoup4==4.12.2
 lxml==4.9.2
 numpy==1.24.3
 pandas==2.0.2
+pyarrow==12.0.0
 numba==0.57.0
 matplotlib==3.7.1
 seaborn==0.12.2
