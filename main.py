@@ -258,6 +258,9 @@ def last_appearing_loto(data):
 
 
 if __name__ == '__main__':
+    pd.options.io.parquet.engine = 'pyarrow'
+    pd.options.mode.string_storage = 'pyarrow'
+
     results, sparse_results = download_data()
 
     last_date = results['date'].max()
