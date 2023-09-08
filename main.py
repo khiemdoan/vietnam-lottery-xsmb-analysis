@@ -301,11 +301,11 @@ if __name__ == '__main__':
 
     env = Environment(
         loader=FileSystemLoader('templates'),
-        autoescape=select_autoescape()
+        autoescape=select_autoescape(),
     )
     template = env.get_template('README.j2')
     content = template.render(loto_result=loto_result, max_count=max_count, min_count=min_count, mean=mean, std=std, **small_results.iloc[-1])
-    with open('README.md', 'w') as outfile:
+    with open('README.md', 'w', encoding='utf-8') as outfile:
         outfile.write(content)
 
     counts = counts.reset_index()
