@@ -12,7 +12,7 @@ Download:
 
 | Lotery      | Loto |
 | :-----------: | :-----------: |
-| <table><tr><td>Date</td><td>28-12-2023</td></tr><tr><td>Special</td><td>15131</td></tr><tr><td>First</td><td>17201</td></tr><tr><td>Second</td><td>23972, 59182</td></tr><tr><td rowspan="2">Third</td><td>38568, 83983, 95738</td></tr><tr><td>34166, 67038, 60011</td></tr><tr><td>Fourth</td><td>6923, 1493, 9579, 2063</td></tr><tr><td rowspan="2">Fifth</td><td>8051, 6625, 0511</td></tr><tr><td>4014, 0525, 6554</td></tr><tr><td>Sixth</td><td>435, 920, 911</td></tr><tr><td>Seventh</td><td>12, 39, 52, 71</td></tr></table> | <table><tr><td>First</td><td>Last</td></tr><tr><td>0</td><td>1</td></tr><tr><td>1</td><td>1, 1, 1, 2, 4</td></tr><tr><td>2</td><td>0, 3, 5, 5</td></tr><tr><td>3</td><td>1, 5, 8, 8, 9</td></tr><tr><td>4</td><td>-</td></tr><tr><td>5</td><td>1, 2, 4</td></tr><tr><td>6</td><td>3, 6, 8</td></tr><tr><td>7</td><td>1, 2, 9</td></tr><tr><td>8</td><td>2, 3</td></tr><tr><td>9</td><td>3</td></tr></table> |
+| <table><tr><td>Date</td><td>29-12-2023</td></tr><tr><td>Special</td><td>36120</td></tr><tr><td>First</td><td>01808</td></tr><tr><td>Second</td><td>24143, 89224</td></tr><tr><td rowspan="2">Third</td><td>54587, 09307, 57960</td></tr><tr><td>57721, 39016, 39494</td></tr><tr><td>Fourth</td><td>5586, 6574, 7750, 5640</td></tr><tr><td rowspan="2">Fifth</td><td>1559, 8201, 7221</td></tr><tr><td>9586, 8938, 6743</td></tr><tr><td>Sixth</td><td>847, 456, 145</td></tr><tr><td>Seventh</td><td>95, 93, 85, 84</td></tr></table> | <table><tr><td>First</td><td>Last</td></tr><tr><td>0</td><td>1, 7, 8</td></tr><tr><td>1</td><td>6</td></tr><tr><td>2</td><td>0, 1, 1, 4</td></tr><tr><td>3</td><td>8</td></tr><tr><td>4</td><td>0, 3, 3, 5, 7</td></tr><tr><td>5</td><td>0, 6, 9</td></tr><tr><td>6</td><td>0</td></tr><tr><td>7</td><td>4</td></tr><tr><td>8</td><td>4, 5, 6, 6, 7</td></tr><tr><td>9</td><td>3, 4, 5</td></tr></table> |
 
 
 <h2>Analysis of special prices</h2>
@@ -27,9 +27,9 @@ Download:
 
 <h2>Analysis of one-year results</h2>
 
-Max: 130. Min: 79.
+Max: 130. Min: 78.
 
-Mean: 97.47. Standard deviation: 9.44.
+Mean: 97.47. Standard deviation: 9.47.
 
 <h3>Detail</h3>
 
