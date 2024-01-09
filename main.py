@@ -209,7 +209,7 @@ def last_appearing(data: pd.DataFrame, type: str):
 
     fig, ax = plt.subplots()
     palette = reversed(colors_from_values(bar_data['delta'], 'summer'))
-    sns.barplot(bar_data, x='value', y='delta', palette=palette, ax=ax)
+    sns.barplot(bar_data, x='value', y='delta', hue='value', palette=palette, ax=ax)
     for bar in ax.containers:
         ax.bar_label(bar, fmt='%d')
     ax.set_title('Top 10')
@@ -250,7 +250,7 @@ def last_appearing_loto(data):
 
     fig, ax = plt.subplots()
     palette = reversed(colors_from_values(bar_data['delta'], 'summer'))
-    sns.barplot(bar_data, x='value', y='delta', palette=palette, ax=ax)
+    sns.barplot(bar_data, x='value', y='delta', hue='value', palette=palette, ax=ax)
     for bar in ax.containers:
         ax.bar_label(bar, fmt='%d')
     ax.set_title('Top 10')
@@ -334,7 +334,7 @@ if __name__ == '__main__':
 
     fig, ax = plt.subplots()
     palette = reversed(colors_from_values(bar_data['freq'], 'summer'))
-    sns.barplot(bar_data, x='value', y='freq', palette=palette, ax=ax)
+    sns.barplot(bar_data, x='value', y='freq', hue='value', palette=palette, ax=ax)
     for bar in ax.containers:
         ax.bar_label(bar, fmt='%d')
     ax.set_title('Top 10')
@@ -343,7 +343,7 @@ if __name__ == '__main__':
     # Distribution
 
     data = counts[['freq']].copy()
-    bins = data.max()[0] - data.min()[0] + 1
+    bins = data.max().iloc[0] - data.min().iloc[0] + 1
 
     fig, ax = plt.subplots()
     sns.histplot(data, kde=True, bins=bins, fill=False, ax=ax)
