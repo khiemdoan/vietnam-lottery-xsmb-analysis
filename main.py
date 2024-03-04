@@ -48,7 +48,7 @@ def load_sparse_results(path: Path) -> pd.DataFrame:
         results = pd.DataFrame(columns=columns)
 
     results['date'] = pd.to_datetime(results['date'])
-    results.iloc[:, 1:] = results.iloc[:, 1:].astype('float64')
+    results.iloc[:, 1:] = results.iloc[:, 1:].astype('int64')
     return results
 
 
