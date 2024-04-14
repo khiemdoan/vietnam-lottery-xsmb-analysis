@@ -12,7 +12,7 @@ Download:
 
 | Lotery (Xổ số) | Loto (Lô tô) |
 | :------------: | :----------: |
-| <table><tr><td>Date (Ngày)</td><td>13-04-2024</td></tr><tr><td>Special (Giải dặc biệt)</td><td>90649</td></tr><tr><td>First (Giải nhất)</td><td>71212</td></tr><tr><td>Second (Giải nhì)</td><td>55720, 56680</td></tr><tr><td rowspan="2">Third (Giải ba)</td><td>64761, 94392, 09089</td></tr><tr><td>57015, 06920, 83467</td></tr><tr><td>Fourth (Giải tư)</td><td>1452, 5230, 5083, 2320</td></tr><tr><td rowspan="2">Fifth (Giải năm)</td><td>4090, 8241, 0310</td></tr><tr><td>6378, 1575, 3896</td></tr><tr><td>Sixth (Giải sáu)</td><td>756, 690, 503</td></tr><tr><td>Seventh (Giải bảy)</td><td>58, 28, 35, 64</td></tr></table> | <table><tr><td>First (Đầu)</td><td>Last (Đuôi)</td></tr><tr><td>0</td><td>3</td></tr><tr><td>1</td><td>0, 2, 5</td></tr><tr><td>2</td><td>0, 0, 0, 8</td></tr><tr><td>3</td><td>0, 5</td></tr><tr><td>4</td><td>1, 9</td></tr><tr><td>5</td><td>2, 6, 8</td></tr><tr><td>6</td><td>1, 4, 7</td></tr><tr><td>7</td><td>5, 8</td></tr><tr><td>8</td><td>0, 3, 9</td></tr><tr><td>9</td><td>0, 0, 2, 6</td></tr></table> |
+| <table><tr><td>Date (Ngày)</td><td>14-04-2024</td></tr><tr><td>Special (Giải dặc biệt)</td><td>71396</td></tr><tr><td>First (Giải nhất)</td><td>20801</td></tr><tr><td>Second (Giải nhì)</td><td>73470, 83615</td></tr><tr><td rowspan="2">Third (Giải ba)</td><td>59318, 54657, 90221</td></tr><tr><td>19494, 20418, 77848</td></tr><tr><td>Fourth (Giải tư)</td><td>2581, 6371, 8850, 1300</td></tr><tr><td rowspan="2">Fifth (Giải năm)</td><td>0309, 2342, 1961</td></tr><tr><td>6616, 5569, 5870</td></tr><tr><td>Sixth (Giải sáu)</td><td>496, 635, 489</td></tr><tr><td>Seventh (Giải bảy)</td><td>52, 22, 89, 90</td></tr></table> | <table><tr><td>First (Đầu)</td><td>Last (Đuôi)</td></tr><tr><td>0</td><td>0, 1, 9</td></tr><tr><td>1</td><td>5, 6, 8, 8</td></tr><tr><td>2</td><td>1, 2</td></tr><tr><td>3</td><td>5</td></tr><tr><td>4</td><td>2, 8</td></tr><tr><td>5</td><td>0, 2, 7</td></tr><tr><td>6</td><td>1, 9</td></tr><tr><td>7</td><td>0, 0, 1</td></tr><tr><td>8</td><td>1, 9, 9</td></tr><tr><td>9</td><td>0, 4, 6, 6</td></tr></table> |
 
 <h2>Analysis of special prices</h2>
 
@@ -26,9 +26,9 @@ Download:
 
 <h2>Analysis of one-year results</h2>
 
-Max: 127. Min: 73.
+Max: 126. Min: 73.
 
-Mean: 97.74. Standard deviation: 9.62.
+Mean: 97.74. Standard deviation: 9.58.
 
 <h3>Detail</h3>
 
