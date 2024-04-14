@@ -2,6 +2,8 @@
 
 Using GitHub Action to automatically fetch and analyze results of the Vietnam lottery daily.
 
+Sử dụng GitHub Action để tự động hoá thu thập và phân tích kết quả xổ số hàng ngày của Việt Nam.
+
 Download:
 
 * [Full data](https://raw.githubusercontent.com/khiemdoan/vietnam-lottery-xsmb-analysis/main/results/xsmb.csv)
@@ -10,42 +12,47 @@ Download:
 * [3-year data](https://raw.githubusercontent.com/khiemdoan/vietnam-lottery-xsmb-analysis/main/results/xsmb_3_year.csv)
 * [5-year data](https://raw.githubusercontent.com/khiemdoan/vietnam-lottery-xsmb-analysis/main/results/xsmb_5_year.csv)
 
-| Lotery (Xổ số) | Loto (Lô tô) |
+| Lottery (Xổ số) | Loto (Lô tô) |
 | :------------: | :----------: |
 | <table><tr><td>Date (Ngày)</td><td>{{ date.strftime('%d-%m-%Y') }}</td></tr><tr><td>Special (Giải dặc biệt)</td><td>{{ "{:05}".format(special) }}</td></tr><tr><td>First (Giải nhất)</td><td>{{ "{:05}".format(prize1) }}</td></tr><tr><td>Second (Giải nhì)</td><td>{{ "{:05}".format(prize2_1) }}, {{ "{:05}".format(prize2_2) }}</td></tr><tr><td rowspan="2">Third (Giải ba)</td><td>{{ "{:05}".format(prize3_1) }}, {{ "{:05}".format(prize3_2) }}, {{ "{:05}".format(prize3_3) }}</td></tr><tr><td>{{ "{:05}".format(prize3_4) }}, {{ "{:05}".format(prize3_5) }}, {{ "{:05}".format(prize3_6) }}</td></tr><tr><td>Fourth (Giải tư)</td><td>{{ "{:04}".format(prize4_1) }}, {{ "{:04}".format(prize4_2) }}, {{ "{:04}".format(prize4_3) }}, {{ "{:04}".format(prize4_4) }}</td></tr><tr><td rowspan="2">Fifth (Giải năm)</td><td>{{ "{:04}".format(prize5_1) }}, {{ "{:04}".format(prize5_2) }}, {{ "{:04}".format(prize5_3) }}</td></tr><tr><td>{{ "{:04}".format(prize5_4) }}, {{ "{:04}".format(prize5_5) }}, {{ "{:04}".format(prize5_6) }}</td></tr><tr><td>Sixth (Giải sáu)</td><td>{{ "{:03}".format(prize6_1) }}, {{ "{:03}".format(prize6_2) }}, {{ "{:03}".format(prize6_3) }}</td></tr><tr><td>Seventh (Giải bảy)</td><td>{{ "{:02}".format(prize7_1) }}, {{ "{:02}".format(prize7_2) }}, {{ "{:02}".format(prize7_3) }}, {{ "{:02}".format(prize7_4) }}</td></tr></table> | <table><tr><td>First (Đầu)</td><td>Last (Đuôi)</td></tr>{%- for result in loto_result %}<tr><td>{{ loop.index0 }}</td><td>{{ result }}</td></tr>{%- endfor %}</table> |
 
-<h2>Analysis of special prices</h2>
+<details>
+  <summary><h2>Analysis of special prices (Phân tích kết quả xổ số)</h2></summary>
+  <h3>Amount of day from last appearing (Số ngày từ lần xuất hiện cuối cùng)</h3>
 
-<h3>Amount of day from last appearing</h3>
+  ![Delta](images/special_delta.jpg)
 
-![Delta](images/special_delta.jpg)
+  <h3>Top 10 amount of day from last appearing (Top 10 số lâu chưa xuất hiện)</h3>
 
-<h3>Top 10 amount of day from last appearing</h3>
+  ![Delta top 10](images/special_delta_top_10.jpg)
+</details>
 
-![Delta top 10](images/special_delta_top_10.jpg)
+<details>
+  <summary><h2>Analysis of one-year Loto results (Phân tích kết quả lô tô trong 1 năm)</h2></summary>
 
-<h2>Analysis of one-year results</h2>
+  Max: {{ max_count }}. Min: {{ min_count }}.
 
-Max: {{ max_count }}. Min: {{ min_count }}.
+  Mean: {{ mean }}. Standard deviation: {{ std }}.
 
-Mean: {{ mean }}. Standard deviation: {{ std }}.
+  <h3>Detail (Chi tiết)</h3>
 
-<h3>Detail</h3>
+  ![Detail](images/heatmap.jpg)
 
-![Detail](images/heatmap.jpg)
+  <h3>Top 10</h3>
 
-<h3>Top 10</h3>
+  ![Top 10](images/top-10.jpg)
 
-![Top 10](images/top-10.jpg)
+  <h3>Distribution (Phân bổ)</h3>
 
-<h3>Distribution</h3>
+  ![Distribution](images/distribution.jpg)
+</details>
 
-![Distribution](images/distribution.jpg)
+<details>
+  <summary><h3>Amount of day from last appearing (Số ngày từ lần xuất hiện cưới cùng)</h2></summary>
 
-<h2>Amount of day from last appearing</h2>
+  ![Delta](images/delta.jpg)
 
-![Delta](images/delta.jpg)
+  <h3>Top 10 amount of day from last appearing (Top 10 số lâu chưa xuất hiện)</h3>
 
-<h3>Top 10 amount of day from last appearing</h3>
-
-![Delta top 10](images/delta_top_10.jpg)
+  ![Delta top 10](images/delta_top_10.jpg)
+</details>
