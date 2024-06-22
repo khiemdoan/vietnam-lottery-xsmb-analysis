@@ -14,7 +14,7 @@ Download:
 
 | Lottery (Xổ số) | Loto (Lô tô) |
 | :------------: | :----------: |
-| <table><tr><td>Date (Ngày)</td><td>21-06-2024</td></tr><tr><td>Special (Giải dặc biệt)</td><td>14296</td></tr><tr><td>First (Giải nhất)</td><td>22522</td></tr><tr><td>Second (Giải nhì)</td><td>16413, 77472</td></tr><tr><td rowspan="2">Third (Giải ba)</td><td>12845, 04835, 56642</td></tr><tr><td>03806, 07785, 15529</td></tr><tr><td>Fourth (Giải tư)</td><td>0992, 5547, 1099, 0542</td></tr><tr><td rowspan="2">Fifth (Giải năm)</td><td>0689, 4519, 8337</td></tr><tr><td>6728, 9897, 5595</td></tr><tr><td>Sixth (Giải sáu)</td><td>389, 051, 276</td></tr><tr><td>Seventh (Giải bảy)</td><td>11, 52, 17, 61</td></tr></table> | <table><tr><td>First (Đầu)</td><td>Last (Đuôi)</td></tr><tr><td>0</td><td>6</td></tr><tr><td>1</td><td>1, 3, 7, 9</td></tr><tr><td>2</td><td>2, 8, 9</td></tr><tr><td>3</td><td>5, 7</td></tr><tr><td>4</td><td>2, 2, 5, 7</td></tr><tr><td>5</td><td>1, 2</td></tr><tr><td>6</td><td>1</td></tr><tr><td>7</td><td>2, 6</td></tr><tr><td>8</td><td>5, 9, 9</td></tr><tr><td>9</td><td>2, 5, 6, 7, 9</td></tr></table> |
+| <table><tr><td>Date (Ngày)</td><td>22-06-2024</td></tr><tr><td>Special (Giải dặc biệt)</td><td>24362</td></tr><tr><td>First (Giải nhất)</td><td>36143</td></tr><tr><td>Second (Giải nhì)</td><td>80759, 88565</td></tr><tr><td rowspan="2">Third (Giải ba)</td><td>86584, 84923, 60925</td></tr><tr><td>16611, 47432, 94039</td></tr><tr><td>Fourth (Giải tư)</td><td>2964, 1915, 6706, 0171</td></tr><tr><td rowspan="2">Fifth (Giải năm)</td><td>7249, 1179, 3059</td></tr><tr><td>9636, 8423, 4066</td></tr><tr><td>Sixth (Giải sáu)</td><td>803, 059, 596</td></tr><tr><td>Seventh (Giải bảy)</td><td>70, 87, 10, 01</td></tr></table> | <table><tr><td>First (Đầu)</td><td>Last (Đuôi)</td></tr><tr><td>0</td><td>1, 3, 6</td></tr><tr><td>1</td><td>0, 1, 5</td></tr><tr><td>2</td><td>3, 3, 5</td></tr><tr><td>3</td><td>2, 6, 9</td></tr><tr><td>4</td><td>3, 9</td></tr><tr><td>5</td><td>9, 9, 9</td></tr><tr><td>6</td><td>2, 4, 5, 6</td></tr><tr><td>7</td><td>0, 1, 9</td></tr><tr><td>8</td><td>4, 7</td></tr><tr><td>9</td><td>6</td></tr></table> |
 
 <details>
   <summary><h2>Analysis of special prices (Phân tích kết quả xổ số)</h2></summary>
@@ -30,9 +30,9 @@ Download:
 <details>
   <summary><h2>Analysis of one-year Loto results (Phân tích kết quả lô tô trong 1 năm)</h2></summary>
 
-  Max: 126. Min: 68.
+  Max: 127. Min: 68.
 
-  Mean: 97.74. Standard deviation: 10.74.
+  Mean: 97.74. Standard deviation: 10.84.
 
   <h3>Detail (Chi tiết)</h3>
 
