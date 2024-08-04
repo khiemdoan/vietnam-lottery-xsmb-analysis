@@ -1,4 +1,3 @@
-
 __author__ = 'KhiemDH'
 __github__ = 'https://github.com/khiemdoan'
 __email__ = 'doankhiem.crazy@gmail.com'
@@ -11,33 +10,14 @@ from time import sleep
 import numpy as np
 import pandas as pd
 import seaborn as sns
-from bs4 import BeautifulSoup
-from cloudscraper import CloudScraper
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from matplotlib import pyplot as plt
 from pytz import timezone
 
+from src.lottery import Lottery
 
-def load_results(path: Path) -> pd.DataFrame:
-    try:
-        results = pd.read_csv(path)
-    except (FileNotFoundError, pd.errors.EmptyDataError):
-        columns=[
-            'date',
-            'special',
-            'prize1',
-            'prize2_1', 'prize2_2',
-            'prize3_1', 'prize3_2', 'prize3_3', 'prize3_4', 'prize3_5', 'prize3_6',
-            'prize4_1', 'prize4_2', 'prize4_3', 'prize4_4',
-            'prize5_1', 'prize5_2', 'prize5_3', 'prize5_4', 'prize5_5', 'prize5_6',
-            'prize6_1', 'prize6_2', 'prize6_3',
-            'prize7_1', 'prize7_2', 'prize7_3', 'prize7_4',
-        ]
-        results = pd.DataFrame(columns=columns)
 
-    results['date'] = pd.to_datetime(results['date'])
-    results.iloc[:, 1:] = results.iloc[:, 1:].astype('int64')
-    return results
+
 
 
 def load_sparse_results(path: Path) -> pd.DataFrame:
@@ -52,48 +32,12 @@ def load_sparse_results(path: Path) -> pd.DataFrame:
     return results
 
 
-def fetch_result(selected_date: date) -> pd.DataFrame:
-    url = f'https://xoso.com.vn/xsmb-{selected_date:%d-%m-%Y}.html'
-    scraper = CloudScraper()
-    response = scraper.get(url)
-    soup = BeautifulSoup(response.text, 'lxml')
-    prizes = soup.find_all(attrs={'class': 'special-prize'})
-    special = [int(p.text) for p in prizes]
-    prizes = soup.find_all(attrs={'class': 'prize1'})
-    prize1 = [int(p.text) for p in prizes]
-    prizes = soup.find_all(attrs={'class': 'prize2'})
-    prize2 = [int(p.text) for p in prizes]
-    prizes = soup.find_all(attrs={'class': 'prize3'})
-    prize3 = [int(p.text) for p in prizes]
-    prizes = soup.find_all(attrs={'class': 'prize4'})
-    prize4 = [int(p.text) for p in prizes]
-    prizes = soup.find_all(attrs={'class': 'prize5'})
-    prize5 = [int(p.text) for p in prizes]
-    prizes = soup.find_all(attrs={'class': 'prize6'})
-    prize6 = [int(p.text) for p in prizes]
-    prizes = soup.find_all(attrs={'class': 'prize7'})
-    prize7 = [int(p.text) for p in prizes]
-    df = pd.DataFrame({
-        'date': [selected_date],
-        'special': [special[0]],
-        'prize1': [prize1[0]],
-        'prize2_1': [prize2[0]], 'prize2_2': [prize2[1]],
-        'prize3_1': [prize3[0]], 'prize3_2': [prize3[1]], 'prize3_3': [prize3[2]], 'prize3_4': [prize3[3]], 'prize3_5': [prize3[4]], 'prize3_6': [prize3[5]],
-        'prize4_1': [prize4[0]], 'prize4_2': [prize4[1]], 'prize4_3': [prize4[2]], 'prize4_4': [prize4[3]],
-        'prize5_1': [prize5[0]], 'prize5_2': [prize5[1]], 'prize5_3': [prize5[2]], 'prize5_4': [prize5[3]], 'prize5_5': [prize5[4]], 'prize5_6': [prize5[5]],
-        'prize6_1': [prize6[0]], 'prize6_2': [prize6[1]], 'prize6_3': [prize6[2]],
-        'prize7_1': [prize7[0]], 'prize7_2': [prize7[1]], 'prize7_3': [prize7[2]], 'prize7_4': [prize7[3]],
-    })
-    df['date'] = pd.to_datetime(df['date'])
-    df.iloc[:, 1:] = df.iloc[:, 1:].astype('int64')
-    return df
-
-
 def download_data() -> tuple[pd.DataFrame, pd.DataFrame]:
     file_path = 'results/xsmb.csv'
     sparse_file_path = 'results/xsmb_sparse.csv'
 
-    results = load_results(file_path)
+    lottery = Lottery()
+    results = lottery.load(file_path)
     sparse_results = load_sparse_results(sparse_file_path)
 
     print(f'Loaded data: {results.shape}')
@@ -121,7 +65,7 @@ def download_data() -> tuple[pd.DataFrame, pd.DataFrame]:
         selected_date = start_date + timedelta(days=i)
         print(f'Fetching: {selected_date}')
         try:
-            row = fetch_result(selected_date)
+            row = lottery.fetch(selected_date)
             print(row.iloc[0].tolist())
 
             sparse = pd.concat([row.iloc[-1:, 0:1], pd.DataFrame(np.zeros((1, 100)))], axis=1)
