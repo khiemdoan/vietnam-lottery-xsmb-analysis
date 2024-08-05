@@ -17,102 +17,6 @@ from pytz import timezone
 from src.lottery import Lottery
 
 
-
-
-
-def load_sparse_results(path: Path) -> pd.DataFrame:
-    try:
-        results = pd.read_csv(path)
-    except (FileNotFoundError, pd.errors.EmptyDataError):
-        columns = ['date'] + [i for i in range(100)]
-        results = pd.DataFrame(columns=columns)
-
-    results['date'] = pd.to_datetime(results['date'])
-    results.iloc[:, 1:] = results.iloc[:, 1:].astype('int64')
-    return results
-
-
-def download_data() -> tuple[pd.DataFrame, pd.DataFrame]:
-    file_path = 'results/xsmb.csv'
-    sparse_file_path = 'results/xsmb_sparse.csv'
-
-    lottery = Lottery()
-    results = lottery.load(file_path)
-    sparse_results = load_sparse_results(sparse_file_path)
-
-    print(f'Loaded data: {results.shape}')
-
-    start_date_results = results['date'].max()
-    start_date_sparse_results = sparse_results['date'].max()
-    start_date = min(start_date_results, start_date_sparse_results)
-
-    if pd.isnull(start_date):
-        start_date = date(2010, 1, 1)
-    else:
-        start_date = start_date.to_pydatetime()
-        start_date += timedelta(days=1)
-        start_date = start_date.date()
-
-    tz = timezone('Asia/Ho_Chi_Minh')
-    now = datetime.now(tz)
-
-    last_date = now.date()
-    if now.time() < time(18, 35):
-        last_date -= timedelta(days=1)
-
-    delta = (last_date - start_date).days + 1
-    for i in range(delta):
-        selected_date = start_date + timedelta(days=i)
-        print(f'Fetching: {selected_date}')
-        try:
-            row = lottery.fetch(selected_date)
-            print(row.iloc[0].tolist())
-
-            sparse = pd.concat([row.iloc[-1:, 0:1], pd.DataFrame(np.zeros((1, 100)))], axis=1)
-            sparse.columns = ['date'] + [str(i) for i in range(100)]
-            numbers = row.iloc[-1, 1:] % 100
-            counts = numbers.value_counts()
-            for k, v in counts.items():
-                sparse.iloc[0, k+1] = v
-
-            if pd.to_datetime(selected_date) not in results['date'].unique():
-                results = pd.concat([results, row])
-            if pd.to_datetime(selected_date) not in sparse_results['date'].unique():
-                sparse_results = pd.concat([sparse_results, sparse])
-        except Exception as ex:
-            logging.exception(ex)
-        sleep(0.1)
-
-    results.to_csv(file_path, index=False)
-    sparse_results[sparse_results.columns[1:]] = sparse_results[sparse_results.columns[1:]].astype(int)
-    sparse_results.to_csv(sparse_file_path, index=False)
-    print(f'Saved data: {results.shape}')
-
-    last_date = pd.to_datetime(last_date)
-
-    start_date = pd.Timestamp(year=last_date.year-5, month=last_date.month, day=last_date.day)
-    results_5_year = results[(start_date < results['date']) & (results['date'] <= last_date)]
-    results_5_year.reset_index(drop=True, inplace=True)
-    results_5_year.to_csv('results/xsmb_5_year.csv', index=False)
-
-    start_date = pd.Timestamp(year=last_date.year-3, month=last_date.month, day=last_date.day)
-    results_3_year = results[(start_date < results['date']) & (results['date'] <= last_date)]
-    results_3_year.reset_index(drop=True, inplace=True)
-    results_3_year.to_csv('results/xsmb_3_year.csv', index=False)
-
-    start_date = pd.Timestamp(year=last_date.year-2, month=last_date.month, day=last_date.day)
-    results_2_year = results[(start_date < results['date']) & (results['date'] <= last_date)]
-    results_2_year.reset_index(drop=True, inplace=True)
-    results_2_year.to_csv('results/xsmb_2_year.csv', index=False)
-
-    start_date = pd.Timestamp(year=last_date.year-1, month=last_date.month, day=last_date.day)
-    small_results = results[(start_date < results['date']) & (results['date'] <= last_date)]
-    small_results.reset_index(drop=True, inplace=True)
-    small_results.to_csv('results/xsmb_1_year.csv', index=False)
-
-    return results, sparse_results
-
-
 def colors_from_values(values, palette_name):
     normalized = (values - min(values)) / (max(values) - min(values))
     indices = np.round(normalized * (len(values) - 1)).astype(np.int32)
@@ -143,7 +47,7 @@ def last_appearing(data: pd.DataFrame, type: str):
     bar_data = last_appearing.sort_values('delta', ascending=False)
     bar_data = bar_data.iloc[:10, :]
     bar_data.reset_index(inplace=True)
-    bar_data = bar_data.rename(columns = {'index': 'value'})
+    bar_data = bar_data.rename(columns={'index': 'value'})
     bar_data['value'] = bar_data['value'].apply(lambda r: f'{r:02d}')
 
     fig, ax = plt.subplots()
@@ -184,7 +88,7 @@ def last_appearing_loto(data):
     bar_data = last_appearing.sort_values('delta', ascending=False)
     bar_data = bar_data.iloc[:10, :]
     bar_data.reset_index(inplace=True)
-    bar_data = bar_data.rename(columns = {'index': 'value'})
+    bar_data = bar_data.rename(columns={'index': 'value'})
     bar_data['value'] = bar_data['value'].apply(lambda r: f'{r:02d}')
 
     fig, ax = plt.subplots()
@@ -205,15 +109,39 @@ if __name__ == '__main__':
     pd.options.io.parquet.engine = 'pyarrow'
     pd.options.mode.string_storage = 'pyarrow'
 
-    results, sparse_results = download_data()
+    lottery = Lottery()
+    lottery.load()
+
+    # Download new data
+
+    begin_date = lottery.get_last_date()
+    tz = timezone('Asia/Ho_Chi_Minh')
+    now = datetime.now(tz)
+    last_date = now.date()
+    if now.time() < time(18, 35):
+        last_date -= timedelta(days=1)
+
+    delta = (last_date - begin_date).days + 1
+    for i in range(1, delta):
+        selected_date = begin_date + timedelta(days=i)
+        print(f'Fetching: {selected_date}')
+        lottery.fetch(selected_date)
+
+    lottery.generate_dataframes()
+    lottery.dump()
+
+    # Analysis
+
+    results = lottery.get_raw_data()
+    sparse_results = lottery.get_sparse_data()
 
     last_date = results['date'].max()
 
-    start_date = pd.Timestamp(year=last_date.year-2, month=last_date.month, day=last_date.day)
+    start_date = pd.Timestamp(year=last_date.year - 2, month=last_date.month, day=last_date.day)
     results_2_year = results[(start_date < results['date']) & (results['date'] <= last_date)]
     results_2_year.reset_index(drop=True, inplace=True)
 
-    start_date = pd.Timestamp(year=last_date.year-1, month=last_date.month, day=last_date.day)
+    start_date = pd.Timestamp(year=last_date.year - 1, month=last_date.month, day=last_date.day)
     small_results = results[(start_date < results['date']) & (results['date'] <= last_date)]
     small_results.reset_index(drop=True, inplace=True)
 
@@ -231,8 +159,10 @@ if __name__ == '__main__':
 
     last_date = sparse_results['date'].max()
 
-    start_date = pd.Timestamp(year=last_date.year-1, month=last_date.month, day=last_date.day)
-    sparse_results_1_year = sparse_results[(start_date < sparse_results['date']) & (sparse_results['date'] <= last_date)]
+    start_date = pd.Timestamp(year=last_date.year - 1, month=last_date.month, day=last_date.day)
+    sparse_results_1_year = sparse_results[
+        (start_date < sparse_results['date']) & (sparse_results['date'] <= last_date)
+    ]
     sparse_results_1_year.reset_index(drop=True, inplace=True)
 
     sparse_results_1_year = sparse_results_1_year.drop(columns=['date'])
@@ -248,7 +178,9 @@ if __name__ == '__main__':
         autoescape=select_autoescape(),
     )
     template = env.get_template('README.j2')
-    content = template.render(loto_result=loto_result, max_count=max_count, min_count=min_count, mean=mean, std=std, **small_results.iloc[-1])
+    content = template.render(
+        loto_result=loto_result, max_count=max_count, min_count=min_count, mean=mean, std=std, **small_results.iloc[-1]
+    )
     with open('README.md', 'w', encoding='utf-8') as outfile:
         outfile.write(content)
 
@@ -297,8 +229,8 @@ if __name__ == '__main__':
     ax.vlines(mean, 0, np.interp(mean, xs, ys), color='red', linestyles='solid')
     ax.vlines(mean - std, 0, np.interp(mean - std, xs, ys), color='red', linestyles='dashed')
     ax.vlines(mean + std, 0, np.interp(mean + std, xs, ys), color='red', linestyles='dashed')
-    ax.vlines(mean - 2*std, 0, np.interp(mean - 2*std, xs, ys), color='red', linestyles='dotted')
-    ax.vlines(mean + 2*std, 0, np.interp(mean + 2*std, xs, ys), color='red', linestyles='dotted')
+    ax.vlines(mean - 2 * std, 0, np.interp(mean - 2 * std, xs, ys), color='red', linestyles='dotted')
+    ax.vlines(mean + 2 * std, 0, np.interp(mean + 2 * std, xs, ys), color='red', linestyles='dotted')
     ax.set_title('Distribution')
     fig.savefig('images/distribution.jpg')
 
