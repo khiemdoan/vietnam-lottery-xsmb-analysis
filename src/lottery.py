@@ -32,15 +32,16 @@ class Lottery:
         for d in data.root:
             self._data[d.date] = d
 
+        self.generate_dataframes()
+
     def dump(self) -> None:
-        self._raw_data.to_csv('data/xsmb.csv', index=False)
-        self._raw_data.to_json('data/xsmb.json', orient='records', date_format='iso', indent=2, index=False)
+        def _dump(df: pd.DataFrame, file_name: str) -> None:
+            df.to_csv(f'data/{file_name}.csv', index=False)
+            df.to_json(f'data/{file_name}.json', orient='records', date_format='iso', indent=2, index=False)
 
-        self._2_digits_data.to_csv('data/xsmb-2-digits.csv', index=False)
-        self._2_digits_data.to_json('data/xsmb-2-digits.json', orient='records', date_format='iso', indent=2, index=False)
-
-        self._sparse_data.to_csv('data/xsmb-sparse.csv', index=False)
-        self._sparse_data.to_json('data/xsmb-sparse.json', orient='records', date_format='iso', indent=2, index=False)
+        _dump(self._raw_data, 'xsmb')
+        _dump(self._2_digits_data, 'xsmb-2-digits')
+        _dump(self._sparse_data, 'xsmb-sparse')
 
     def fetch(self, selected_date: date) -> None:
         url = f'https://xoso.com.vn/xsmb-{selected_date:%d-%m-%Y}.html'
