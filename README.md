@@ -16,7 +16,7 @@ Dự án này được tạo bởi [Khiêm Đoàn](https://github.com/khiemdoan)
 
 | Lottery (Xổ số) | Loto (Lô tô) |
 | :------------: | :----------: |
-| <table><tr><td>Date (Ngày)</td><td>29-09-2024</td></tr><tr><td>Special (Giải đặc biệt)</td><td>76086</td></tr><tr><td>First (Giải nhất)</td><td>05076</td></tr><tr><td>Second (Giải nhì)</td><td>86459, 72177</td></tr><tr><td rowspan="2">Third (Giải ba)</td><td>02516, 92166, 41540</td></tr><tr><td>13840, 30112, 37013</td></tr><tr><td>Fourth (Giải tư)</td><td>1435, 4391, 3249, 8117</td></tr><tr><td rowspan="2">Fifth (Giải năm)</td><td>4539, 9727, 5882</td></tr><tr><td>6093, 3496, 2522</td></tr><tr><td>Sixth (Giải sáu)</td><td>237, 862, 310</td></tr><tr><td>Seventh (Giải bảy)</td><td>67, 22, 86, 29</td></tr></table> | <table><tr><td>First (Đầu)</td><td>Last (Đuôi)</td></tr><tr><td>0</td><td>-</td></tr><tr><td>1</td><td>0, 2, 3, 6, 7</td></tr><tr><td>2</td><td>2, 2, 7, 9</td></tr><tr><td>3</td><td>5, 7, 9</td></tr><tr><td>4</td><td>0, 0, 9</td></tr><tr><td>5</td><td>9</td></tr><tr><td>6</td><td>2, 6, 7</td></tr><tr><td>7</td><td>6, 7</td></tr><tr><td>8</td><td>2, 6, 6</td></tr><tr><td>9</td><td>1, 3, 6</td></tr></table> |
+| <table><tr><td>Date (Ngày)</td><td>30-09-2024</td></tr><tr><td>Special (Giải đặc biệt)</td><td>18840</td></tr><tr><td>First (Giải nhất)</td><td>19728</td></tr><tr><td>Second (Giải nhì)</td><td>94210, 05607</td></tr><tr><td rowspan="2">Third (Giải ba)</td><td>11827, 08684, 63074</td></tr><tr><td>69265, 87729, 08582</td></tr><tr><td>Fourth (Giải tư)</td><td>3611, 5953, 4742, 9393</td></tr><tr><td rowspan="2">Fifth (Giải năm)</td><td>2473, 4623, 0811</td></tr><tr><td>7726, 0474, 0767</td></tr><tr><td>Sixth (Giải sáu)</td><td>892, 110, 105</td></tr><tr><td>Seventh (Giải bảy)</td><td>85, 49, 07, 02</td></tr></table> | <table><tr><td>First (Đầu)</td><td>Last (Đuôi)</td></tr><tr><td>0</td><td>2, 5, 7, 7</td></tr><tr><td>1</td><td>0, 0, 1, 1</td></tr><tr><td>2</td><td>3, 6, 7, 8, 9</td></tr><tr><td>3</td><td>-</td></tr><tr><td>4</td><td>0, 2, 9</td></tr><tr><td>5</td><td>3</td></tr><tr><td>6</td><td>5, 7</td></tr><tr><td>7</td><td>3, 4, 4</td></tr><tr><td>8</td><td>2, 4, 5</td></tr><tr><td>9</td><td>2, 3</td></tr></table> |
 
 <details>
   <summary><h2>Analysis of special prices (Phân tích kết quả xổ số)</h2></summary>
@@ -34,7 +34,7 @@ Dự án này được tạo bởi [Khiêm Đoàn](https://github.com/khiemdoan)
 
   Max: 130. Min: 63.
 
-  Mean: 97.74. Standard deviation: 11.91.
+  Mean: 97.74. Standard deviation: 11.88.
 
   <h3>Detail (Chi tiết)</h3>
 
