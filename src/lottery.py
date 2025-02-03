@@ -45,8 +45,10 @@ class Lottery:
 
     def fetch(self, selected_date: date) -> None:
         url = f'https://xoso.com.vn/xsmb-{selected_date:%d-%m-%Y}.html'
-        response = self._http.get(url)
-        soup = BeautifulSoup(response.text, 'lxml')
+        resp = self._http.get(url)
+        if resp.status_code != 200:
+            return
+        soup = BeautifulSoup(resp.text, 'lxml')
         prizes = soup.find_all(attrs={'class': 'special-prize'})
         special = [int(p.text) for p in prizes]
         prizes = soup.find_all(attrs={'class': 'prize1'})
@@ -63,6 +65,9 @@ class Lottery:
         prize6 = [int(p.text) for p in prizes]
         prizes = soup.find_all(attrs={'class': 'prize7'})
         prize7 = [int(p.text) for p in prizes]
+
+        if len(special) == 0:
+            return
 
         result = Result(
             date=selected_date,
