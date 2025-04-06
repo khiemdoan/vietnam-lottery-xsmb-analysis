@@ -10,7 +10,7 @@ Dự án này được tạo bởi [Khiêm Đoàn](https://github.com/khiemdoan)
 
 | Lottery (Xổ số) | Loto (Lô tô) |
 | :------------: | :----------: |
-| <table><tr><td>Date (Ngày)</td><td>05-04-2025</td></tr><tr><td>Special (Giải đặc biệt)</td><td>60687</td></tr><tr><td>First (Giải nhất)</td><td>79644</td></tr><tr><td>Second (Giải nhì)</td><td>84840, 72645</td></tr><tr><td rowspan="2">Third (Giải ba)</td><td>59904, 76186, 90190</td></tr><tr><td>34077, 16214, 80475</td></tr><tr><td>Fourth (Giải tư)</td><td>0934, 5460, 2647, 0786</td></tr><tr><td rowspan="2">Fifth (Giải năm)</td><td>2307, 9246, 6208</td></tr><tr><td>4911, 0013, 8988</td></tr><tr><td>Sixth (Giải sáu)</td><td>418, 782, 424</td></tr><tr><td>Seventh (Giải bảy)</td><td>12, 85, 07, 21</td></tr></table> | <table><tr><td>First (Đầu)</td><td>Last (Đuôi)</td></tr><tr><td>0</td><td>4, 7, 7, 8</td></tr><tr><td>1</td><td>1, 2, 3, 4, 8</td></tr><tr><td>2</td><td>1, 4</td></tr><tr><td>3</td><td>4</td></tr><tr><td>4</td><td>0, 4, 5, 6, 7</td></tr><tr><td>5</td><td>-</td></tr><tr><td>6</td><td>0</td></tr><tr><td>7</td><td>5, 7</td></tr><tr><td>8</td><td>2, 5, 6, 6, 7, 8</td></tr><tr><td>9</td><td>0</td></tr></table> |
+| <table><tr><td>Date (Ngày)</td><td>06-04-2025</td></tr><tr><td>Special (Giải đặc biệt)</td><td>99779</td></tr><tr><td>First (Giải nhất)</td><td>55356</td></tr><tr><td>Second (Giải nhì)</td><td>64985, 40310</td></tr><tr><td rowspan="2">Third (Giải ba)</td><td>01946, 39260, 95906</td></tr><tr><td>45810, 77966, 36593</td></tr><tr><td>Fourth (Giải tư)</td><td>3751, 0965, 2149, 0312</td></tr><tr><td rowspan="2">Fifth (Giải năm)</td><td>9302, 8481, 0785</td></tr><tr><td>3709, 4590, 3381</td></tr><tr><td>Sixth (Giải sáu)</td><td>395, 603, 140</td></tr><tr><td>Seventh (Giải bảy)</td><td>52, 97, 72, 27</td></tr></table> | <table><tr><td>First (Đầu)</td><td>Last (Đuôi)</td></tr><tr><td>0</td><td>2, 3, 6, 9</td></tr><tr><td>1</td><td>0, 0, 2</td></tr><tr><td>2</td><td>7</td></tr><tr><td>3</td><td>-</td></tr><tr><td>4</td><td>0, 6, 9</td></tr><tr><td>5</td><td>1, 2, 6</td></tr><tr><td>6</td><td>0, 5, 6</td></tr><tr><td>7</td><td>2, 9</td></tr><tr><td>8</td><td>1, 1, 5, 5</td></tr><tr><td>9</td><td>0, 3, 5, 7</td></tr></table> |
 
 ## Data (Dữ liệu)
 
@@ -55,7 +55,7 @@ df.info()
 
   Max: 122. Min: 66.
 
-  Mean: 97.47. Standard deviation: 10.41.
+  Mean: 97.47. Standard deviation: 10.4.
 
   <h3>Detail (Chi tiết)</h3>
 
