@@ -23,7 +23,7 @@ jobs:
           pip install -r requirements.txt
 
       - name: fetch data
-        run: python src/main.py
+        run: python src/fetch.py
 
       - name: analyze data
         run: python src/analyze.py
