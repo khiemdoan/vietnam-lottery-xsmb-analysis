@@ -1,20 +1,14 @@
-__author__ = 'KhiemDH'
+__author__ = 'Khiem Doan'
 __github__ = 'https://github.com/khiemdoan'
 __email__ = 'doankhiem.crazy@gmail.com'
-
-import logging
-from datetime import date, datetime, time, timedelta
-from pathlib import Path
-from time import sleep
 
 import numpy as np
 import pandas as pd
 import seaborn as sns
-from jinja2 import Environment, FileSystemLoader, select_autoescape
 from matplotlib import pyplot as plt
-from pytz import timezone
 
-from src.lottery import Lottery
+from lottery import Lottery
+from templates import Render
 
 
 def colors_from_values(values, palette_name):
@@ -104,33 +98,9 @@ def last_appearing_loto(data):
     ax.set_title('Top 10')
     fig.savefig('images/delta_top_10.jpg')
 
-
 if __name__ == '__main__':
-    pd.options.io.parquet.engine = 'pyarrow'
-    pd.options.mode.string_storage = 'pyarrow'
-
     lottery = Lottery()
     lottery.load()
-
-    # Download new data
-
-    begin_date = lottery.get_last_date()
-    tz = timezone('Asia/Ho_Chi_Minh')
-    now = datetime.now(tz)
-    last_date = now.date()
-    if now.time() < time(18, 35):
-        last_date -= timedelta(days=1)
-
-    delta = (last_date - begin_date).days + 1
-    for i in range(1, delta):
-        selected_date = begin_date + timedelta(days=i)
-        print(f'Fetching: {selected_date}')
-        lottery.fetch(selected_date)
-
-    lottery.generate_dataframes()
-    lottery.dump()
-
-    # Analysis
 
     results = lottery.get_raw_data()
     sparse_results = lottery.get_sparse_data()
@@ -173,14 +143,8 @@ if __name__ == '__main__':
     mean = counts.mean().round(2)
     std = counts.std().round(2)
 
-    env = Environment(
-        loader=FileSystemLoader('templates'),
-        autoescape=select_autoescape(),
-    )
-    template = env.get_template('README.j2')
-    content = template.render(
-        loto_result=loto_result, max_count=max_count, min_count=min_count, mean=mean, std=std, **small_results.iloc[-1]
-    )
+    render = Render()
+    content = render('README.j2', loto_result=loto_result, max_count=max_count, min_count=min_count, mean=mean, std=std, **small_results.iloc[-1])
     with open('README.md', 'w', encoding='utf-8') as outfile:
         outfile.write(content)
 
