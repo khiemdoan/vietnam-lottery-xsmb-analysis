@@ -10,7 +10,7 @@ import pandas as pd
 from bs4 import BeautifulSoup
 from cloudscraper import CloudScraper
 
-from src.dtos import Result, ResultList
+from dtos import Result, ResultList
 
 
 class Lottery:
