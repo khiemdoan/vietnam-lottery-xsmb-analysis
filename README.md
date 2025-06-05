@@ -10,13 +10,15 @@ Dự án này được tạo bởi [Khiêm Đoàn](https://github.com/khiemdoan)
 
 | Lottery (Xổ số) | Loto (Lô tô) |
 | :------------: | :----------: |
-| <table><tr><td>Date (Ngày)</td><td>04-06-2025</td></tr><tr><td>Special (Giải đặc biệt)</td><td>37921</td></tr><tr><td>First (Giải nhất)</td><td>32098</td></tr><tr><td>Second (Giải nhì)</td><td>76169, 10479</td></tr><tr><td rowspan="2">Third (Giải ba)</td><td>86740, 29697, 17169</td></tr><tr><td>30664, 85289, 65955</td></tr><tr><td>Fourth (Giải tư)</td><td>8480, 7522, 2956, 7471</td></tr><tr><td rowspan="2">Fifth (Giải năm)</td><td>3919, 8723, 1456</td></tr><tr><td>4640, 3891, 0025</td></tr><tr><td>Sixth (Giải sáu)</td><td>831, 694, 705</td></tr><tr><td>Seventh (Giải bảy)</td><td>22, 51, 71, 55</td></tr></table> | <table><tr><td>First (Đầu)</td><td>Last (Đuôi)</td></tr><tr><td>0</td><td>5</td></tr><tr><td>1</td><td>9</td></tr><tr><td>2</td><td>1, 2, 2, 3, 5</td></tr><tr><td>3</td><td>1</td></tr><tr><td>4</td><td>0, 0</td></tr><tr><td>5</td><td>1, 5, 5, 6, 6</td></tr><tr><td>6</td><td>4, 9, 9</td></tr><tr><td>7</td><td>1, 1, 9</td></tr><tr><td>8</td><td>0, 9</td></tr><tr><td>9</td><td>1, 4, 7, 8</td></tr></table> |
+| <table><tr><td>Date (Ngày)</td><td>05-06-2025</td></tr><tr><td>Special (Giải đặc biệt)</td><td>81062</td></tr><tr><td>First (Giải nhất)</td><td>00435</td></tr><tr><td>Second (Giải nhì)</td><td>97168, 02728</td></tr><tr><td rowspan="2">Third (Giải ba)</td><td>09121, 20539, 00564</td></tr><tr><td>59713, 59172, 30057</td></tr><tr><td>Fourth (Giải tư)</td><td>4081, 3673, 6542, 0664</td></tr><tr><td rowspan="2">Fifth (Giải năm)</td><td>6497, 4350, 3535</td></tr><tr><td>0541, 1633, 0906</td></tr><tr><td>Sixth (Giải sáu)</td><td>915, 805, 031</td></tr><tr><td>Seventh (Giải bảy)</td><td>95, 30, 87, 86</td></tr></table> | <table><tr><td>First (Đầu)</td><td>Last (Đuôi)</td></tr><tr><td>0</td><td>5, 6</td></tr><tr><td>1</td><td>3, 5</td></tr><tr><td>2</td><td>1, 8</td></tr><tr><td>3</td><td>0, 1, 3, 5, 5, 9</td></tr><tr><td>4</td><td>1, 2</td></tr><tr><td>5</td><td>0, 7</td></tr><tr><td>6</td><td>2, 4, 4, 8</td></tr><tr><td>7</td><td>2, 3</td></tr><tr><td>8</td><td>1, 6, 7</td></tr><tr><td>9</td><td>5, 7</td></tr></table> |
 
 ## Data (Dữ liệu)
 
-* Raw data: [xsmb.csv](https://raw.githubusercontent.com/khiemdoan/vietnam-lottery-xsmb-analysis/refs/heads/main/data/xsmb.csv) [xsmb.json](https://raw.githubusercontent.com/khiemdoan/vietnam-lottery-xsmb-analysis/refs/heads/main/data/xsmb.json)
-* 2-digits data: [xsmb-2-digits.csv](https://raw.githubusercontent.com/khiemdoan/vietnam-lottery-xsmb-analysis/refs/heads/main/data/xsmb-2-digits.csv) [xsmb-2-digits.json](https://raw.githubusercontent.com/khiemdoan/vietnam-lottery-xsmb-analysis/refs/heads/main/data/xsmb-2-digits.json)
-* Sparse data: [xsmb-sparse.csv](https://raw.githubusercontent.com/khiemdoan/vietnam-lottery-xsmb-analysis/refs/heads/main/data/xsmb-sparse.csv) [xsmb-sparse.json](https://raw.githubusercontent.com/khiemdoan/vietnam-lottery-xsmb-analysis/refs/heads/main/data/xsmb-sparse.json)
+|          | CSV | JSON | Parquet |
+|----------|-----|------|---------|
+| Raw      | [xsmb.csv](https://raw.githubusercontent.com/khiemdoan/vietnam-lottery-xsmb-analysis/refs/heads/main/data/xsmb.csv) | [xsmb.json](https://raw.githubusercontent.com/khiemdoan/vietnam-lottery-xsmb-analysis/refs/heads/main/data/xsmb.json) | [xsmb.parquet](https://raw.githubusercontent.com/khiemdoan/vietnam-lottery-xsmb-analysis/refs/heads/main/data/xsmb.parquet) |
+| 2-digits | [xsmb-2-digits.csv](https://raw.githubusercontent.com/khiemdoan/vietnam-lottery-xsmb-analysis/refs/heads/main/data/xsmb-2-digits.csv) | [xsmb-2-digits.json](https://raw.githubusercontent.com/khiemdoan/vietnam-lottery-xsmb-analysis/refs/heads/main/data/xsmb-2-digits.json) | [xsmb-2-digits.parquet](https://raw.githubusercontent.com/khiemdoan/vietnam-lottery-xsmb-analysis/refs/heads/main/data/xsmb-2-digits.parquet) |
+| Sparse   | [xsmb-sparse.csv](https://raw.githubusercontent.com/khiemdoan/vietnam-lottery-xsmb-analysis/refs/heads/main/data/xsmb-sparse.csv) | [xsmb-sparse.json](https://raw.githubusercontent.com/khiemdoan/vietnam-lottery-xsmb-analysis/refs/heads/main/data/xsmb-sparse.json) | [xsmb-sparse.csv](https://raw.githubusercontent.com/khiemdoan/vietnam-lottery-xsmb-analysis/refs/heads/main/data/xsmb-sparse.csv) | [xsmb-sparse.parquet](https://raw.githubusercontent.com/khiemdoan/vietnam-lottery-xsmb-analysis/refs/heads/main/data/xsmb-sparse.parquet) |
 
 ## Using
 
@@ -53,9 +55,9 @@ df.info()
 <details>
   <summary><h2>Analysis of one-year Loto results (Phân tích kết quả lô tô trong 1 năm)</h2></summary>
 
-  Max: 120. Min: 69.
+  Max: 119. Min: 69.
 
-  Mean: 97.47. Standard deviation: 9.75.
+  Mean: 97.47. Standard deviation: 9.65.
 
   <h3>Detail (Chi tiết)</h3>
 
