@@ -38,6 +38,7 @@ class Lottery:
         def _dump(df: pd.DataFrame, file_name: str) -> None:
             df.to_csv(f'data/{file_name}.csv', index=False)
             df.to_json(f'data/{file_name}.json', orient='records', date_format='iso', indent=2, index=False)
+            df.to_parquet(f'data/{file_name}.parquet', index=False)
 
         _dump(self._raw_data, 'xsmb')
         _dump(self._2_digits_data, 'xsmb-2-digits')
