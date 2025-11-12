@@ -6,13 +6,13 @@ on:
 
 jobs:
   update-data:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-slim
     steps:
       - name: checkout repo content
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: setup python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: '3.13'
           cache: pip
@@ -31,10 +31,15 @@ jobs:
       - name: get current date
         run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
 
-      - name: push changes
-        uses: actions-x/commit@v6
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          message: Updated ${{ env.date }}
-          email: action@github.com
-          name: GitHub Action
+      - name: Commit changes
+        run: |
+          if git diff --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+
+          git config --global user.email "action@github.com"
+          git config --global user.name "GitHub Action"
+          git add .
+          git commit -m "Updated ${{ env.date }}"
+          git push origin main
