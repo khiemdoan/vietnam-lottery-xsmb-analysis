@@ -1,0 +1,50 @@
+[project]
+name = "vietnam-lottery-xsmb-analysis"
+version = "0.1.0"
+description = "Using GitHub Action to automatically fetch and analyze results of the Vietnam lottery daily."
+authors = [
+    {name = "Khiem Doan", email = "doankhiem.crazy@gmail.com"},
+]
+
+readme = "README.md"
+license = {text = "MIT"}
+
+requires-python = "==3.14.*"
+
+dependencies = [
+    "tzdata==2025.3",
+    "pydantic==2.12.5",
+    "pydantic-settings==2.12.0",
+    "cloudscraper==1.2.71",
+    "tenacity==9.1.2",
+    "beautifulsoup4==4.14.3",
+    "lxml==6.0.2",
+    "numpy==2.4.1",
+    "pandas==3.0.0",
+    "pyarrow==23.0.0",
+    "matplotlib==3.10.8",
+    "seaborn==0.13.2",
+    "jinja2==3.1.6",
+]
+
+[dependency-groups]
+tools = [
+]
+testing = [
+    "pytest",
+    "pytest-asyncio",
+]
+linting = [
+    "isort",
+    "ruff",
+]
+
+[tool.isort]
+line_length = 120
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.format]
+quote-style = "single"
+indent-style = "space"
