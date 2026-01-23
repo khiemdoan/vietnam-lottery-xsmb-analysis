@@ -98,6 +98,7 @@ def last_appearing_loto(data):
     ax.set_title('Top 10')
     fig.savefig('images/delta_top_10.jpg')
 
+
 if __name__ == '__main__':
     lottery = Lottery()
     lottery.load()
@@ -123,7 +124,7 @@ if __name__ == '__main__':
     loto_result = []
     for i in range(10):
         category = sorted([d for d in recent_results if d // 10 == i])
-        category = [f'{d%10:1d}' for d in category]
+        category = [f'{d % 10:1d}' for d in category]
         category = ', '.join(category) if len(category) > 0 else '-'
         loto_result.append(category)
 
@@ -144,7 +145,15 @@ if __name__ == '__main__':
     std = counts.std().round(2)
 
     render = Render()
-    content = render('README.j2', loto_result=loto_result, max_count=max_count, min_count=min_count, mean=mean, std=std, **small_results.iloc[-1])
+    context = {
+        'loto_result': loto_result,
+        'max_count': max_count,
+        'min_count': min_count,
+        'mean': mean,
+        'std': std,
+        **small_results.iloc[-1],
+    }
+    content = render('README.j2', context)
     with open('README.md', 'w', encoding='utf-8') as outfile:
         outfile.write(content)
 

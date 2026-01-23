@@ -4,9 +4,8 @@ __email__ = 'doankhiem.crazy@gmail.com'
 
 from datetime import datetime, time, timedelta
 from zoneinfo import ZoneInfo
+
 from lottery import Lottery
-
-
 
 if __name__ == '__main__':
     lottery = Lottery()

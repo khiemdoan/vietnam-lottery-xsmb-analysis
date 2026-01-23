@@ -5,11 +5,11 @@ __url__ = 'https://github.com/khiemdoan/clean-architecture-python-boilerplate/bl
 
 __all__ = [
     'Render',
+    'AsyncRender',
 ]
 
-import asyncio
 from pathlib import Path
-from typing import Any, Coroutine
+from typing import Any
 
 from jinja2 import FileSystemLoader, select_autoescape
 from jinja2.nativetypes import NativeEnvironment
@@ -17,24 +17,30 @@ from jinja2.nativetypes import NativeEnvironment
 
 class Render:
     def __init__(self) -> None:
-        self._loop = asyncio.get_event_loop()
         this_dir = Path(__file__).parent
         loader = FileSystemLoader(this_dir)
         autoescape = select_autoescape()
-        self._sync_env = NativeEnvironment(
+        self._env = NativeEnvironment(
             loader=loader,
             autoescape=autoescape,
         )
-        self._async_env = NativeEnvironment(
+
+    def __call__(self, file: str, context: dict[str, Any], **kwargs) -> str:
+        template = self._env.get_template(file)
+        return template.render(context, **kwargs)
+
+
+class AsyncRender:
+    def __init__(self) -> None:
+        this_dir = Path(__file__).parent
+        loader = FileSystemLoader(this_dir)
+        autoescape = select_autoescape()
+        self._env = NativeEnvironment(
             loader=loader,
             autoescape=autoescape,
             enable_async=True,
         )
 
-    def __call__(self, file: str, context: dict[str, Any] = {}, **kwargs) -> str | Coroutine[Any, Any, str]:
-        if self._loop.is_running():
-            template = self._async_env.get_template(file)
-            return template.render_async(context, **kwargs)
-        else:
-            template = self._sync_env.get_template(file)
-            return template.render(context, **kwargs)
+    async def __call__(self, file: str, context: dict[str, Any], **kwargs) -> str:
+        template = self._env.get_template(file)
+        return await template.render_async(context, **kwargs)
