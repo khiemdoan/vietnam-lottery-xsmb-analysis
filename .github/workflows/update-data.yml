@@ -1,8 +1,9 @@
 name: Update data
 
 on:
+  workflow_dispatch:
   schedule:
-    - cron: 35 10 * * *
+    - cron: 35 11 * * * # 6:35 PM in Vietnam
 
 jobs:
   update-data:
