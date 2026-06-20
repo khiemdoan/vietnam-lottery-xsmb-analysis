@@ -18,7 +18,7 @@ dependencies = [
     "cloudscraper==1.2.71",
     "tenacity==9.1.2",
     "beautifulsoup4==4.14.3",
-    "lxml==6.0.2",
+    "lxml==6.1.0",
     "numpy==2.4.1",
     "pandas==3.0.0",
     "pyarrow==23.0.0",
