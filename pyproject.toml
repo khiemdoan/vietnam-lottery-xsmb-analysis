@@ -12,17 +12,16 @@ license = {text = "MIT"}
 requires-python = "==3.14.*"
 
 dependencies = [
-    "tzdata==2025.3",
-    "pydantic==2.12.5",
-    "pydantic-settings==2.12.0",
+    "tzdata==2026.3",
+    "pydantic==2.13.4",
+    "pydantic-settings==2.14.2",
     "cloudscraper==1.2.71",
-    "tenacity==9.1.2",
-    "beautifulsoup4==4.14.3",
-    "lxml==6.0.2",
-    "numpy==2.4.1",
-    "pandas==3.0.0",
-    "pyarrow==23.0.0",
-    "matplotlib==3.10.8",
+    "tenacity==9.1.4",
+    "beautifulsoup4==4.15.0",
+    "lxml==6.1.1",
+    "numpy==2.5.1",
+    "pandas==3.0.3",
+    "matplotlib==3.11.0",
     "seaborn==0.13.2",
     "jinja2==3.1.6",
 ]
