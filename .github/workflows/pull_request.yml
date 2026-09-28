@@ -1,0 +1,28 @@
+# author: 'Khiem Doan'
+# github: 'https://github.com/khiemdoan'
+# email: 'doankhiem.crazy@gmail.com'
+
+name: Pull Request
+
+on:
+  pull_request:
+    branches:
+      - main
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Run unittests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7 # v10.2.0
+
+      - name: Run tests
+        run: uv run --frozen --with pytest pytest
