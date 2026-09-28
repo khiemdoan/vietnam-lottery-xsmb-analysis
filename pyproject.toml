@@ -39,6 +39,9 @@ linting = [
     "ruff",
 ]
 
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+
 [tool.isort]
 line_length = 120
 
