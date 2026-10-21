@@ -11,6 +11,7 @@ from bs4 import BeautifulSoup
 from cloudscraper import CloudScraper
 
 from dtos import Result, ResultList
+from schemas import RAW_SCHEMA, SPARSE_SCHEMA, TWO_DIGITS_SCHEMA
 
 
 class Lottery:
@@ -33,8 +34,11 @@ class Lottery:
             self._data[d.date] = d
 
         self.generate_dataframes()
+        self.validate()
 
     def dump(self) -> None:
+        self.validate()
+
         def _dump(df: pd.DataFrame, file_name: str) -> None:
             df.to_csv(f'data/{file_name}.csv', index=False)
             df.to_json(f'data/{file_name}.json', orient='records', date_format='iso', indent=2, index=False)
@@ -58,7 +62,11 @@ class Lottery:
         self._sparse_data = pd.concat(
             [
                 self._2_digits_data.iloc[:, 0:1],
-                pd.DataFrame(np.zeros((self._2_digits_data.shape[0], 100), dtype=int)),
+                pd.DataFrame(
+                    np.zeros((self._2_digits_data.shape[0], 100), dtype=int),
+                    index=self._2_digits_data.index,
+                    columns=[f'{i:02d}' for i in range(100)],
+                ),
             ],
             axis=1,
         )
@@ -72,6 +80,11 @@ class Lottery:
         self._begin_date = begin_date.to_pydatetime().date()
         last_date = self._raw_data['date'].max()
         self._last_date = last_date.to_pydatetime().date()
+
+    def validate(self) -> None:
+        RAW_SCHEMA.validate(self._raw_data, lazy=True)
+        TWO_DIGITS_SCHEMA.validate(self._2_digits_data, lazy=True)
+        SPARSE_SCHEMA.validate(self._sparse_data, lazy=True)
 
     def get_raw_data(self) -> pd.DataFrame:
         return self._raw_data
