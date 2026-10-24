@@ -7,8 +7,6 @@ from datetime import date
 
 import numpy as np
 import pandas as pd
-from bs4 import BeautifulSoup
-from cloudscraper import CloudScraper
 
 from dtos import Result, ResultList
 from schemas import RAW_SCHEMA, SPARSE_SCHEMA, TWO_DIGITS_SCHEMA
@@ -16,8 +14,6 @@ from schemas import RAW_SCHEMA, SPARSE_SCHEMA, TWO_DIGITS_SCHEMA
 
 class Lottery:
     def __init__(self) -> None:
-        self._http = CloudScraper()
-
         self._data: dict[date, Result] = {}
 
         self._raw_data: pd.DataFrame = pd.DataFrame()

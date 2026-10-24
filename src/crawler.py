@@ -8,45 +8,66 @@ from typing import Self
 
 from bs4 import BeautifulSoup
 from cloudscraper import CloudScraper
-from tenacity import retry, stop_after_attempt, wait_exponential
+from tenacity import retry, retry_if_not_exception_type, stop_after_attempt, wait_exponential
 
 from dtos import Result
 
+REQUEST_TIMEOUT = 30
+PRIZE_COUNTS = frozendict({
+    'special-prize': 1,
+    'prize1': 1,
+    'prize2': 2,
+    'prize3': 6,
+    'prize4': 4,
+    'prize5': 6,
+    'prize6': 3,
+    'prize7': 4,
+})
 
-class Crawler(AbstractContextManager):
+
+class Crawler(AbstractContextManager['Crawler']):
     def __enter__(self) -> Self:
-        self._http = CloudScraper()
+        self._http: CloudScraper = CloudScraper()
         return self
 
     def __exit__(self, exc_type, exc_value, traceback) -> None:
         self._http.close()
 
-    @retry(stop=stop_after_attempt(5), wait=wait_exponential(min=1, max=10))
-    def fetch(self, selected_date: date) -> Result:
+    @staticmethod
+    def _extract_prizes(soup: BeautifulSoup, css_class: str) -> list[int]:
+        return [int(node.get_text(strip=True)) for node in soup.find_all(class_=css_class)]
+
+    @retry(
+        stop=stop_after_attempt(5),
+        wait=wait_exponential(min=1, max=10),
+        retry=retry_if_not_exception_type(ValueError),
+    )
+    def fetch(self, selected_date: date) -> Result | None:
         url = f'https://xoso.com.vn/xsmb-{selected_date:%d-%m-%Y}.html'
-        resp = self._http.get(url)
+        resp = self._http.get(url, timeout=REQUEST_TIMEOUT)
+        if resp.status_code == 404:
+            return None
         resp.raise_for_status()
 
         soup = BeautifulSoup(resp.text, 'lxml')
-        prizes = soup.find_all(attrs={'class': 'special-prize'})
-        special = [int(p.text) for p in prizes]
-        prizes = soup.find_all(attrs={'class': 'prize1'})
-        prize1 = [int(p.text) for p in prizes]
-        prizes = soup.find_all(attrs={'class': 'prize2'})
-        prize2 = [int(p.text) for p in prizes]
-        prizes = soup.find_all(attrs={'class': 'prize3'})
-        prize3 = [int(p.text) for p in prizes]
-        prizes = soup.find_all(attrs={'class': 'prize4'})
-        prize4 = [int(p.text) for p in prizes]
-        prizes = soup.find_all(attrs={'class': 'prize5'})
-        prize5 = [int(p.text) for p in prizes]
-        prizes = soup.find_all(attrs={'class': 'prize6'})
-        prize6 = [int(p.text) for p in prizes]
-        prizes = soup.find_all(attrs={'class': 'prize7'})
-        prize7 = [int(p.text) for p in prizes]
+        prizes = {css_class: self._extract_prizes(soup, css_class) for css_class in PRIZE_COUNTS}
 
-        if len(special) == 0:
-            return
+        if not any(prizes.values()):
+            return None
+
+        for css_class, values in prizes.items():
+            expected = PRIZE_COUNTS[css_class]
+            if len(values) != expected:
+                raise ValueError(f'Expected {expected} {css_class} prizes, got {len(values)}')
+
+        special = prizes['special-prize']
+        prize1 = prizes['prize1']
+        prize2 = prizes['prize2']
+        prize3 = prizes['prize3']
+        prize4 = prizes['prize4']
+        prize5 = prizes['prize5']
+        prize6 = prizes['prize6']
+        prize7 = prizes['prize7']
 
         return Result(
             date=selected_date,
