@@ -10,7 +10,7 @@ Dự án này được tạo bởi [Khiêm Đoàn](https://github.com/khiemdoan)
 
 | Lottery (Xổ số) | Loto (Lô tô) |
 | :------------: | :----------: |
-| <table><tr><td>Date (Ngày)</td><td>07-11-2026</td></tr><tr><td>Special (Giải đặc biệt)</td><td>95014</td></tr><tr><td>First (Giải nhất)</td><td>68396</td></tr><tr><td>Second (Giải nhì)</td><td>89608, 87511</td></tr><tr><td rowspan="2">Third (Giải ba)</td><td>76577, 44956, 40190</td></tr><tr><td>88362, 52004, 77514</td></tr><tr><td>Fourth (Giải tư)</td><td>5999, 0863, 3360, 3300</td></tr><tr><td rowspan="2">Fifth (Giải năm)</td><td>3357, 7371, 3434</td></tr><tr><td>4723, 7726, 9273</td></tr><tr><td>Sixth (Giải sáu)</td><td>363, 153, 462</td></tr><tr><td>Seventh (Giải bảy)</td><td>86, 16, 12, 43</td></tr></table> | <table><tr><td>First (Đầu)</td><td>Last (Đuôi)</td></tr><tr><td>0</td><td>0, 4, 8</td></tr><tr><td>1</td><td>1, 2, 4, 4, 6</td></tr><tr><td>2</td><td>3, 6</td></tr><tr><td>3</td><td>4</td></tr><tr><td>4</td><td>3</td></tr><tr><td>5</td><td>3, 6, 7</td></tr><tr><td>6</td><td>0, 2, 2, 3, 3</td></tr><tr><td>7</td><td>1, 3, 7</td></tr><tr><td>8</td><td>6</td></tr><tr><td>9</td><td>0, 6, 9</td></tr></table> |
+| <table><tr><td>Date (Ngày)</td><td>08-11-2026</td></tr><tr><td>Special (Giải đặc biệt)</td><td>38926</td></tr><tr><td>First (Giải nhất)</td><td>80190</td></tr><tr><td>Second (Giải nhì)</td><td>38938, 92201</td></tr><tr><td rowspan="2">Third (Giải ba)</td><td>17156, 34059, 24517</td></tr><tr><td>10870, 99607, 55628</td></tr><tr><td>Fourth (Giải tư)</td><td>4697, 6832, 4405, 0404</td></tr><tr><td rowspan="2">Fifth (Giải năm)</td><td>5728, 6604, 0245</td></tr><tr><td>3796, 1479, 0444</td></tr><tr><td>Sixth (Giải sáu)</td><td>008, 982, 851</td></tr><tr><td>Seventh (Giải bảy)</td><td>47, 87, 89, 41</td></tr></table> | <table><tr><td>First (Đầu)</td><td>Last (Đuôi)</td></tr><tr><td>0</td><td>1, 4, 4, 5, 7, 8</td></tr><tr><td>1</td><td>7</td></tr><tr><td>2</td><td>6, 8, 8</td></tr><tr><td>3</td><td>2, 8</td></tr><tr><td>4</td><td>1, 4, 5, 7</td></tr><tr><td>5</td><td>1, 6, 9</td></tr><tr><td>6</td><td>-</td></tr><tr><td>7</td><td>0, 9</td></tr><tr><td>8</td><td>2, 7, 9</td></tr><tr><td>9</td><td>0, 6, 7</td></tr></table> |
 
 ## Data (Dữ liệu)
 
@@ -55,9 +55,9 @@ df.info()
 <details>
   <summary><h2>Analysis of one-year Loto results (Phân tích kết quả lô tô trong 1 năm)</h2></summary>
 
-  Max: 125. Min: 81.
+  Max: 124. Min: 81.
 
-  Mean: 97.47. Standard deviation: 9.7.
+  Mean: 97.47. Standard deviation: 9.58.
 
   <h3>Detail (Chi tiết)</h3>
 
